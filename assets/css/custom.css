@@ -1,0 +1,1024 @@
+@charset "utf-8";
+/* CSS Document */
+body{ font-size:14px;  max-width: 100%; overflow-x:hidden;
+  }
+#header {
+  width: 950px;
+  height: 82px;
+  margin: 0 auto;
+}
+#header #siteLogo {
+  width: 310px;
+  height: 35px;
+  float: left;
+  margin-top: 10px;
+  padding-left: 10px;
+}
+#siteLogo a{
+	text-decoration: none;
+	font-size: 34px;
+}
+
+#headerWrap {
+  width: 100%;
+  height: 82px;
+  float: left;
+  /*background: #34495e;*/
+  /*background: #6AC0BD;*/
+  /*background: #4f92af;*/
+  background: #0097A7;  
+  border-bottom: 1px solid #dcdcdc;
+  -moz-box-shadow: 2px 2px 4px #f6f3f3;
+  -webkit-box-shadow: 2px 2px 4px #f6f3f3;
+  box-shadow: 2px 2px 4px #f6f3f3;
+}
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+
+#headerWrap a{
+	color: #fff;
+}
+
+
+#headerRightSectioBox {
+  width: 400px;
+  height: auto;
+  float: right;
+}
+#helplineBox {
+  width: 348px;
+  height: 30px;
+  float: right;
+  /*border: 1px solid #fff;*/
+  background: none;
+  font-family: 'OpenSansRegular';
+  font-size: 19px;
+}
+.helplineTitle {
+  width: 77px;
+  height: 30px;
+  line-height: 30px;
+  float: left;
+  color: #fff;
+}
+
+.helplineNumber {
+  width: 152px;
+  height: 30px;
+  line-height: 30px;
+  float: left;
+  color: #fff;
+  text-align: center;
+}
+.headerLinks {
+  width: 450px;
+  height: auto;
+  float: right;
+  text-align: right;
+  margin-top: 28px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #a9a9a9;
+}
+
+#footerWrap {
+  width: 100%;
+  height: auto;
+  float: left;
+  margin-top: 20px;
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  background: #ffffff;
+  background: -moz-linear-gradient(top, #ffffff 0%, #f1f1f1 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f1f1f1));
+  background: -webkit-linear-gradient(top, #ffffff 0%,#f1f1f1 100%);
+  background: -o-linear-gradient(top, #ffffff 0%,#f1f1f1 100%);
+  background: -ms-linear-gradient(top, #ffffff 0%,#f1f1f1 100%);
+  background: linear-gradient(to bottom, #ffffff 0%,#f1f1f1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f1f1f1',GradientType=0 );
+}
+#footerDiv {
+  width: 950px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.footerQuickLinkMenu {
+  width: 355px;
+  height: 120px;
+  float: left;
+  padding-left: 10px;
+}
+.footerQuickLinkTitl {
+  width: 400px;
+  height: 35px;
+  line-height: 35px;
+  float: left;
+  color: #212121;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: 'OpenSansRegular';
+}
+.footerMenu1 {
+  width: 80px;
+  height: 15px;
+  float: left;
+  margin-top: 5px;
+  text-align: left;
+  display: inline;
+}
+.footerMenu1 a {
+  text-align: left;
+  font-size: 11px;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  color: #5f5f5f;
+  text-align: left;
+  margin: 4px 0px 0px 5px;
+}
+.footerMenu1 a:hover {
+  color: #0588bc;
+  text-decoration: underline;
+}
+.footerMenu a {
+  text-align: left;
+  font-size: 11px;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  color: #5f5f5f;
+  text-align: left;
+  margin: 4px 0px 0px 5px;
+}
+.securityPayMethodIconDiv {
+  width: 590px;
+  height: auto;
+  float: right;
+}
+.WeAcceptBox {
+  width: 250px;
+  height: auto;
+  float: left;
+}
+.WeAcceptText {
+  width: 180px;
+  height: 35px;
+  line-height: 35px;
+  float: left;
+  font-family: 'OpenSansRegular';
+  font-size: 14px;
+  color: #212121;
+  font-weight: bold;
+  text-align: left;
+}
+.socialMediaBox {
+  width: 200px;
+  height: auto;
+  float: left;
+  margin-left: 10px;
+}
+.socialMediaText {
+  width: 180px;
+  height: 35px;
+  line-height: 35px;
+  float: left;
+  font-family: 'OpenSansRegular';
+  font-size: 14px;
+  color: #212121;
+  font-weight: bold;
+  text-align: left;
+}
+
+.left {  float: left; }
+
+
+/* car lists */
+.clist { margin:5px 0 0 0; padding: 0 }
+.clist li { padding: 15px; margin: 0; border-bottom: 1px dashed #ddd; position: relative; list-style: none; overflow: hidden; zoom: 1 }
+.clist li.selected { background-color: rgba(255, 255, 255, 0.7) }
+.clist li.dummy { display: none }
+.clist li:hover { background-color: rgba(255, 255, 255, 0.7) }
+.clist li:last-child { border: none }
+.clist input[type="checkbox"] { margin: 0 }
+.templatelist { background: #f4f4f4 }
+
+
+/* step 2 */
+.car_properties { margin: 0 0 10px 0; padding: 0 }
+.car_properties li{ background-color: #fff; margin: 0 10px 0 0; padding: 2px 7px 2px 4px; border: none; list-style: none; display: inline-block }
+.car_properties li span { font-size: 0.8em; padding: 0 0 0 10px; height: 16px; width: 16px; background: 0 0;   font-weight: bold; font-size: 16px;}
+.car_properties li.seats span { background-position: 0 -16px }
+.car_properties li.doors span { background-position: 0 0 }
+.car_properties li.transmission span { background-position: 0 -32px }
+
+img.car_image, img.extras_image { border: 0; margin-top: 0; width: 100px }
+h2.car_name, h2.extras_name { font-size: 1.2em; line-height: 28px; margin: 0 0 10px 0; display: inline-block }
+.picture { width: 130px }
+.details { margin-left: 130px }
+a.car_details { display: inline-block }
+.car_details_tooltip { display: none; margin-top: 10px }
+.avail { margin-left: 10px; vertical-align: top }
+.car_availability { font-size: 0.8em; color: #CC0000; margin: 15px 0 0 10px }
+.price_wrapper { position: relative }
+.price_wrapper .btn { position: absolute; bottom: 0; right: 0 }
+span.car_price, span.extras_cost {   font-size: 1.2em; font-weight: 400; color:#d43f3a}
+span.car_price.discount, span.extras_cost.discount { color: #c00; line-height: 1 }
+span.car_price.discount strike, span.extras_cost.discount strike { font-size: .6em; color: #000; display: inline-block; margin-left: .5em }
+span.car_price span { display: inline-block; font-size: .5em; font-weight: 400; vertical-align: top }
+span.car_price_int, span.extras_cost_int { display: none }
+span.car_price_int.discount, span.extras_cost_int.discount { color: #c00 }
+span.car_price_int.discount strike, span.extras_cost_int.discount strike { font-size: .7em; color: #000; margin-left: .5em }
+span.car_count { display: block }
+select.car_count { display: inline-block; width: 85px; margin-top: 1em }
+
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
+}
+.bs-example {
+  position: relative;
+  padding: 45px 15px 15px;
+  margin: 0 -15px 15px;
+  border-color: #e5e5e5 #eee #eee;
+  border-style: solid;
+  border-width: 1px 0;
+  -webkit-box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+}
+.static-page {
+	min-height: 260px;
+}
+
+/*.btn-primary {
+  color: #fff;
+  background-color: #EF4D4E;
+  border-color: #EF4D4E;
+}
+.btn-primary:hover,
+.btn-primary.active,
+.btn-primary:focus  {
+  color: #fff;
+  border-color: #ff5a5f;
+  border-bottom-color: #e00007;
+  background-color: #ff5a5f;
+}*/
+
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+
+#joinUsForm .table td,
+#joinUsForm .table th {
+   text-align: center;   
+}
+
+.car_price_int label{
+	  /*font-weight: 700;*/
+	  color: #d43f3a;
+}
+.car_price_int .form-control {
+	  width: 50%;
+}
+
+.discount {
+	color: red;
+}
+.logoText {
+	color: #fff
+}
+
+.inline {
+    display:inline;
+}
+
+.seoWidgetContent {
+  clear: both;
+  cursor: default;
+  margin-top: 6px;
+}
+.bestCarRentalPrices ul {
+  clear: both;
+  padding-top: 10px;
+  line-height: 1;
+  margin-left: -15px;
+}
+.bestCarRentalPrices li {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  padding: 0;
+  font-size: 12px;
+  background-color: #FFF;
+  border-bottom: 1px solid #e8e8e8;
+  height: 115px;
+  width: 265px;
+  margin: 0 0 15px 15px;
+}
+.bestCarRentalPrices li a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.bestCarRentalPrices li a .best-car {
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+}
+.bestCarRentalPrices li a span {
+  position: absolute;
+  margin: 0;
+  font-size: 15px;
+}
+.bestCarRentalPrices li a .carclass {
+  top: 21px;
+  left: 0;
+  color: #000;
+  font-weight: 600;
+}
+.bestCarRentalPrices li a .passengers {
+  top: 42px;
+  left: 0;
+  color: #888;
+  font-size: 13px;
+}
+.bestCarRentalPrices li a .price {
+  top: 0;
+  left: 0;
+  color: #000;
+}
+.bestCarRentalPrices li a span.price span {
+  position: relative;
+}
+.bestCarRentalPrices li a .image {
+  overflow: hidden;
+  width: 120px;
+  height: 130px;
+  right: 0;
+  top: auto;
+  bottom: -35px;
+}
+.bestCarRentalPrices li img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  margin-top: 0;
+}
+.col-md-6.bestCarRentalPrices {
+  padding: 0;
+  margin-top: -74px;
+}
+.col-md-6.bestCarRentalPrices h2 {
+   /*border-bottom: 1px solid #ddd;*/
+   width: 100%;
+   padding-bottom: 20px;
+   font-size:20px;
+ }
+.bestCarRentalPrices li a .agency {
+  width: 40px;
+  height: 20px;
+  top: 0;
+  right: 0;
+}
+.bestCarRentalPrices li a button {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  min-width: 68px;
+  min-height: 28px;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 500;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/*.btn-default {
+  border-color: #007a87;
+  border-bottom-color: #004f58;
+  background-color: #007a87;
+  color: #fff;
+}
+
+.btn-default:hover{
+	border-color:#009aab;
+	border-bottom-color:#006671;
+	background-color:#009aab;
+	color:#fff
+}
+.btn-default.active{
+	border-color:#004f58;
+	background-color:#004f58;
+	color:#fff
+}
+.btn-default:focus {
+	border-color:#009aab;
+	border-bottom-color:#006671;
+	background-color:#009aab;
+	color:#fff
+}*/
+
+#page-h1 {
+	  margin-top:10px;
+	  font-size: 25px;
+}
+.we_offer h2 {
+	font-size: 20px;
+}
+#footerWrap { width:100%; }
+
+#footerMenuW{ width:100%; }
+
+
+#footerDiv{ width:100%; height:auto; margin:0 auto; }
+
+.footerQuickLinkMenu{ width:100%; height:auto; margin:0%; padding:0% 0% 4% 0%; }
+
+.footerQuickLinkTitl{ width:90%; margin:0% 5% 0% 5%; }
+
+.footerMenu1{ width:45%; height:15px; float:left; margin-top:5px; text-align:left; display:inline; padding-left:5%;  }
+
+.footerMenu{ width:45%; height:15px; float:left; margin-top:5px; text-align:left; display:inline; padding-left:5%;    }
+
+
+#footerMenuWOpenDiv{ width:100%; height:auto; margin:auto;}
+
+.footer_top {
+  overflow: hidden;
+  padding: 5px 0px 15px;
+  border-bottom: 1px solid #0F0F0F;
+  background: none repeat scroll 0% 0% #212121;
+  color: #fff;
+}
+.footer_b {
+  overflow: hidden;
+  padding: 15px 0px 5px;
+  border-bottom: 1px solid #0F0F0F;
+  background: none repeat scroll 0% 0% #212121;
+  color: #fff;
+}
+.footer_top li {
+	color: #727272;
+}
+.footer_top li a{
+	color: #727272;
+}
+
+.footer_top ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.fotter-social {
+  margin: 0px;
+}
+.footer_b li{
+	padding:0px;
+}
+.footer_top .menu_head {
+	font-size:20px;
+}
+#booking table {
+	font-size: 12px;
+}
+
+#headerWrap .dropdown-menu a{
+	color: #333;
+}
+#headerWrap span{
+	font-size:13px;
+}
+/* RESPONSIVE for mobile
+------------------------------------------------------------------------------------------------------------------ */
+@media only screen and (max-width: 1200px) { 
+	.steps_tabs { font-size: 1.1em }
+	.steps_tabs .text { display: none }
+}
+@media only screen and (max-width: 992px) { 
+	
+	.contact-info span.plarge { font-size: 2.5em }
+	.col-md-6.bestCarRentalPrices {
+	  padding: 0;
+	  margin-top: -12px;
+	}
+	.we_offer .col-xs-6 {
+		width: 33%;
+	}
+}
+@media only screen and (min-width: 768px) {
+	.footer_b .col-sm-3{ width: 27%; }
+}
+@media only screen and (max-width: 767px) {
+	
+	.social-contact > li:first-child{  margin-right: 30px;}
+	.cred_area { text-align: left }
+	.entry img { max-width: 100%; }
+	.gallery .gallery-caption { font-size: 0.7em }
+	.logo-spot,
+	.foot-logo,
+	.contact-info { text-align: center }
+	.contact-info span.plarge { line-height: 1.5em }
+	.pagination ul>li { display: none }
+	.pagination ul>li.active { display: inline }
+	.pagination ul>li.prev { display: inline }
+	.pagination ul>li.next { display: inline }
+	.clist li { padding: 10px; margin: 0 0 10px 0; border: 1px solid #DDD !important; background-color: #fff }
+	.car_availability { display: none }
+	.price_wrapper { padding-top: 10px }
+	.car_properties { display: none }
+	a.car_details { display: none }
+	.avail { margin-right: 10px; vertical-align: text-bottom }
+	.picture { width: 75px }
+	.details { margin-left: 85px; text-align: right }
+	.extras_details { display: none }
+	.details_wrapper .picture { width: 75px }
+	.details_wrapper .details { margin-left: 95px; text-align: left }
+}
+@media only screen and (max-width: 476px) { 
+	.nav-tabs>li>a, .nav-pills>li>a { padding-right: 10px; padding-left: 10px }
+	.widget_cinfo { display: none }
+	.btn[name="reset"] { display: none }
+	#book_form .lbl { display: none }
+	h2.car_name, h2.extras_name { font-size: 1.1em; line-height: 18px }
+	.picture { width: 55px }
+	.details { margin-left: 75px }
+	.details_wrapper .picture { float: none }
+	.details_wrapper .details { margin-left: 0 }
+	h2.extras_name { margin: 5px 0 }
+	.checkbox_wrapper { width: 10% }
+	.details_wrapper { width: 40% }
+	.cost_wrapper { width: 46% }
+}
+
+@media only screen and (min-width: 767px) {
+	.data_wrapper { width: 70%; position: relative; float: left }
+	.price_wrapper { width: 30%; *width: 25%; float: left; text-align: right; padding: 0 0 40px 0 }
+	.price_wrapper span, .price_wrapper input { display: block; float: none }
+	span.car_price_int, span.extras_cost_int { margin-top: 10px; display: block }
+	.bs-example {
+	  margin-right: 0;
+	  margin-left: 0;
+	  background-color: #fff; 
+	  border-color: #ddd; 
+	  border-width: 1px; */
+	  border-radius: 4px 4px 0 0;
+	  -webkit-box-shadow: none; 
+	  box-shadow: none; 
+	}
+}
+
+
+@media screen and (max-width: 900px) {
+
+	#headerWrap a{
+		color: #ffffff;
+	}
+	
+	#headerWrap {
+	  width: 100%;
+	  height: auto;
+	  float: left;
+	  /*background: #34495e;*/
+	  background: #0097A7;	  
+	  border-bottom: 1px solid #dcdcdc;
+	  -moz-box-shadow: 2px 2px 4px #f6f3f3;
+	  -webkit-box-shadow: 2px 2px 4px #f6f3f3;
+	  box-shadow: 2px 2px 4px #f6f3f3;
+	}
+	#header {
+	  width: 100%;
+	  height: auto;
+	  clear: both;
+	  background: none;
+	  margin: 0 auto;
+	}
+	#header #siteLogo {
+	  width: 100%;
+	  height: 56px;
+	  clear: both;
+	  text-align: center;
+	  margin: 10px 0px 10px 0px;
+	  padding: 0px;
+	  background-position: 70% center;
+	}
+	#headerRightSectioBox {
+	  width: 100%;
+	  height: auto;
+	  clear: both;
+	}
+	
+	#helplineBox {
+	  width: 70%;
+	  height: auto;
+	  margin: 0% 15% 0% 15%;
+	  border: 1px solid #fff;
+	  background: none;
+	  -moz-border-radius: 4px;
+	  -webkit-border-radius: 4px;
+	  -khtml-border-radius: 4px;
+	  border-radius: 4px;
+	  font-family: 'OpenSansRegular';
+	  font-size: 19px;
+	}
+	.helplineTitle {
+	  width: 30%;
+	  height: 30px;
+	  line-height: 30px;
+	  font-size: 0px;
+	  color: #fff;
+	  background: #fff;
+	  text-align: center;
+	}
+	.helplineNumber {
+	  width: 70%;
+	  height: auto;
+	  line-height: 30px;
+	  color: #fff;
+	  font-weight: bold;
+	  text-align: center;
+	  font-size: 85%;
+	}
+	.headerLinks {
+	  width: 100%;
+	  height: auto;
+	  clear: both;
+	  margin-top: 14px;
+	  margin-bottom: 14px;
+	  font-family: Arial, Helvetica, sans-serif;
+	  font-size: 11px;
+	  color: #a9a9a9;
+	  text-align: center;
+	}
+	.data_wrapper {
+	  width: 70%;
+	  position: relative;
+	  float: left;
+	}
+	
+	.price_wrapper {
+	  width: 30%;
+	  float: left;
+	  text-align: right;
+	  padding: 0 0 40px 0;
+	}
+}
+
+
+
+body,div,p,span,input{ font-size:16px; padding:0;margin:0px;}
+
+#header{width:1170px}
+#helplineBox{ text-align: right;height:auto;width: 232px;}
+.headerLinks{ margin-top:12px;}
+#headerRightSectioBox{ margin-top: 7px;}
+#page-h1{width: 50%;;float:left}
+.tab-content .tab-pane .col-md-6.bestCarRentalPrices h2{font-size:25px;}
+.col-md-6.bestCarRentalPrices{margin-top: -78px;}
+.nav.nav-tabs{float:left;width:100%;margin-bottom:10px;}
+ul li{list-style-type: none;}
+.bestCarRentalPrices ul{float: left;margin:0px;padding:0;}
+.bestCarRentalPrices li a span{position: static;}
+.bestCarRentalPrices li a{position: static;}
+.bestCarRentalPrices li img{position: static;}
+.bestCarRentalPrices li{margin:0px;height:auto;width:49%; margin: 0 2% 10px 0;padding: 0 0 10px;border-bottom:1px solid #0097a7 }
+.bestCarRentalPrices li:nth-child(2n){ margin-right:0;}
+
+.bestCarRentalPrices li a .image{float:left;height:auto}
+.bestCarRentalPrices li a button{position: static;}
+.bestCarRentalPrices li a .best-car{width:58%;float:left}
+.bestCarRentalPrices li a .image{float:left;padding-right:10px;}
+.bestCarRentalPrices li a .carclass{display: inline-block;width:100%}
+.bestCarRentalPrices li a .price{display: inline-block;width:100%;padding:10px 0;}
+.bestCarRentalPrices li a button{display: inline-block;}
+.container{padding:0px}
+.row{padding:0px;margin:0px;}
+.tab-content .tab-pane{}
+.form-horizontal .control-label{padding:0px;text-align: justify;}
+.form-horizontal .control-label{font-size:16px}
+hr{padding:0px;margin:0px 0 15px 0;}
+.row .we_offer h2{text-align:letf;background:#cbcbcb;background:-moz-linear-gradient(top,#cbcbcb 0,#f6f3f3 17%,#f6f3f3 100%);background:-webkit-gradient(linear,left top,left top,color-stop(0%,#cbcbcb),color-stop(17%,#f6f3f3),color-stop(100%,#f6f3f3));background:-webkit-linear-gradient(top,#cbcbcb 0,#f6f3f3 17%,#f6f3f3 100%);background:-o-linear-gradient(top,#cbcbcb 0,#f6f3f3 17%,#f6f3f3 100%);background:-ms-linear-gradient(top,#cbcbcb 0,#f6f3f3 17%,#f6f3f3 100%);background:linear-gradient(to top,#cbcbcb 0,#f6f3f3 17%,#f6f3f3 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#cbcbcb', endColorstr='#f6f3f3', GradientType=0);text-transform:uppercase;font-size:24px;padding:10px 0 10px 10px;margin:0px}
+.row .we_offer .text-center h2{background:#fff;padding:10px 0 10px 10px;margin:0px;}
+
+.col-md-6.bestCarRentalPrices{}
+/*
+.btn.btn-danger.btn-lg{ margin-left: 15px;margin-top:5px;float:left;background:#1799cf;background:-moz-linear-gradient(top,#1799cf 0,#177298 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#1799cf),color-stop(100%,#177298));background:-webkit-linear-gradient(top,#1799cf 0,#177298 100%);background:-o-linear-gradient(top,#1799cf 0,#177298 100%);background:-ms-linear-gradient(top,#1799cf 0,#177298 100%);background:linear-gradient(to bottom,#1799cf 0,#177298 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1799cf',endColorstr='#177298',GradientType=0);color:#fff;padding:10px 20px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;text-transform:uppercase;border:none;}
+
+.btn.btn-danger.btn-lg:hover{
+background: rgb(0,183,234); 
+background: -moz-linear-gradient(top, rgba(0,183,234,1) 0%, rgba(0,158,195,1) 100%); 
+background: -webkit-linear-gradient(top, rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%);
+background: linear-gradient(to bottom, rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 );}
+*/
+.btn-primary{background:-moz-linear-gradient(top,#1799cf 0,#177298 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#1799cf),color-stop(100%,#177298));background:-webkit-linear-gradient(top,#1799cf 0,#177298 100%);background:-o-linear-gradient(top,#1799cf 0,#177298 100%);background:-ms-linear-gradient(top,#1799cf 0,#177298 100%);background:linear-gradient(to bottom,#1799cf 0,#177298 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1799cf',endColorstr='#177298',GradientType=0);color:#fff;border:none;text-transform:uppercase;}
+.btn-primary:hover{
+background: rgb(0,183,234); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(0,183,234,1) 0%, rgba(0,158,195,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 ); /* IE6-9 */}
+.tab-content .tab-pane .col-md-6 .form-horizontal .form-group .control-label{width:20%} 
+.tab-content .tab-pane .col-md-6 .form-horizontal .form-group .col-sm-10{width:80%}
+.tab-content .tab-pane .col-md-6 .form-horizontal .form-group .col-sm-10 .input-group .form-control{width:90%}
+.carlist.clist .clearfix .data_wrapper .picture .car_image{width:100%;height:auto}
+.carlist.clist .clearfix .data_wrapper .picture{width:15%;border: 1px solid #eee;padding: 10px;}
+.carlist.clist .clearfix .data_wrapper .details.clearfix{float:left}
+.carlist.clist .clearfix .data_wrapper .details{margin-left:20px;}
+.carlist.clist .clearfix .data_wrapper .details.clearfix .car_name{font-size:22px;color: #333;padding-top:10px}
+
+.tab-content .tab-pane .list_wrapper .carlist.clist li{border-bottom:1px solid #ccc}
+.tab-content .tab-pane .list_wrapper .carlist.clist li:hover{	  border-bottom: 1px solid #ccc;
+	  -moz-box-shadow: 0 5px 5px #ccc;
+	  -webkit-box-shadow:0 5px 5px #ccc;
+	  box-shadow:0 5px 5px #ccc;}
+.tab-content .tab-pane .list_wrapper .carlist.clist li:nth-child(2n) {
+    background: #f7f7f7 none repeat scroll 0 0;
+}	  
+	  
+.mv-hover {
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+}
+/*.mv-hover .img-info{position:absolute;width:100%;height:100%;top:0;left:0;background:rgba(0,0,0,0.3);transition:all 1s ease}
+.mv-hover img{display:block;width:100%;height:auto}
+.mv-hover:hover .img-info{background:rgba(0,0,0,0.1)}*/
+.nav-tabs > li > a{font-size:18px;}
+.car_count select{float:left;width:48%;margin:0px 0 0 2%;}
+#headerWrap{border:none;}
+span.car_price, span.extras_cost{text-align:center;font-size: 20px;font-weight: bold;padding-top:10px;	}
+span.car_price_int, span.extras_cost_int{font-size:20px;text-align:center; font-weight: normal;margin-top: 27px}
+.price_wrapper .btn{position: static;}
+.booknow{float:right;}
+.booknow .btn{padding:5px 14px;font-size: 20px;margin: 22px auto 0; }
+.price_wrapper{padding:10px 10px 5px 0;}
+.list_wrapper .carlist.clist li{padding:0px 0 5px 0; margin-bottom:15px;}
+.kmicon{background: url("../images/km.png") no-repeat 0 0;width:22px;height:17px;float:left}
+.car_properties .glyphicon .eq_value{font-size:16px;}
+.modal-content{text-align: left}
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group{height:34px}
+/*.form-group{margin-bottom:5px}*/
+.pric-l{float:left;width:64%}
+.car_price_int label{color:#666;}
+.car_properties{display:block}
+.menu{display:none;}
+.callus-b{display:none;}
+.logowrap {
+    float: left;
+}
+.header-outer {
+    left: 0;
+    position: fixed;
+    z-index: 9999;
+}
+#signinModal .vertical-alignment-helper .modal-dialog .modal-content .modal-body .form-horizontal .form-group{margin-left:0px;}
+/* mobile */
+@media screen and (max-width:767px){
+#header{width:100%}
+.tab-content{width:100%;float:left;clear:both}
+.tab-content .tab-pane .col-md-6 .form-horizontal .form-group .control-label{font-size:14px;}
+.tab-content .tab-pane .col-md-6 .form-horizontal .form-group .control-label{ float: left;width: 32%;padding:0px}
+.tab-content .tab-pane .col-md-6 .form-horizontal .form-group .col-sm-10{float: left;width: 67%;padding:0px}
+.tab-content .col-md-6{padding:0 0 0 21px;width:95%;float:left}
+.helplineTitle{color:#333;font-size:14px}
+.headerLinks{ font-size: 13px;}
+.col-md-6.bestCarRentalPrices {
+    margin-top:0%;
+    padding-left: 10px !important;
+}
+.bestCarRentalPrices li{width:100%; margin: 0 0 15px 0;}
+.row.we_offer .text-center.col-xs-6.col-sm-3 {width:100%}
+.bestCarRentalPrices li a .best-car{width:57%}
+.nav.nav-tabs{padding-left:10px;}
+#page-h1{padding-left:10px;}
+.form-group {
+    margin-bottom: 7px;
+}
+.btn.btn-danger.btn-lg{float:right}
+.footer_b .container .row .col-xs-6.col-sm-4{width:100%}
+.footer_b .container .row  .col-xs-6.col-sm-3.pull-right{width:100%}
+.data_wrapper{width:100%}
+.carlist.clist .clearfix .data_wrapper .picture{width:37%;float:left;margin-left: 2%;}
+.carlist.clist .clearfix .data_wrapper .details {width:56%;float:left;margin-left:10px;text-align:left}
+.carlist.clist .clearfix .data_wrapper .details.clearfix .car_name {
+    color: #333;
+    font-size: 20px;
+    line-height: 28px;
+    padding-top: 10px;
+}
+.price_wrapper{width:100%;text-align: center;}
+span.car_price_int, span.extras_cost_int{display:block}
+.list_wrapper .carlist.clist li{border:none}
+.clist li{border-top:none !important}
+.clist{margin:0px 0 0;}
+.h1, .h2, .h3, h1, h2, h3{margin-bottom: 6px;
+    margin-top: 10px;}
+#page-h1 {
+    font-size:20px;
+}
+.nav-tabs > li > a {
+    font-size: 15px;
+}
+span.car_price, span.extras_cost{ float: left; padding-left: 7px;}
+span.car_price_int, span.extras_cost_int {
+    display: block;
+    float: left;
+    padding: 13px 0 0 15px;
+}
+.list_wrapper .carlist.clist li{margin-bottom: 10px;}
+.bs-example {
+    border: medium none;
+    box-shadow: none;
+    clear: both;
+    float: left;
+    margin: 0 0 0 4%;
+    padding: 10px;
+    position: relative;
+    width: 96%;
+}
+.page-header {
+    border: medium none;
+    clear: both;
+    float: left;
+    margin:0;
+    padding-bottom: 9px;
+    width: 100%;
+}
+.page-header h1{font-size:20px;padding-left: 3%;
+    width: 98%;}
+.bs-example .form-horizontal .form-group .col-sm-2.control-label {
+    float: left;
+    width: 23%;
+}
+span.car_price_int, span.extras_cost_int{padding:10px 0 0 10px;margin:0px;font-size: 18px;line-height:18px}
+.pric-l {float: left;width: 55%;}
+.booknow .btn{margin:10px 0 0 0;font-size: 16px; padding: 0 10px;}
+.carlist.clist .clearfix .data_wrapper .picture{padding:3px;}
+.carlist.clist .clearfix .data_wrapper .picture{float: left;margin-left: 2%;width: 25%;}
+.carlist.clist .clearfix .data_wrapper .details.clearfix .car_name {color: #333;font-size: 16px;line-height: 16px;padding-top: 0;}
+.car_properties {margin: 0;padding: 0;}
+h2.car_name, h2.extras_name{ margin: 0 0 5px;}
+.form-control{height: 26px;  padding: 0 5px;}
+#header #siteLogo{ margin: 5px 0}
+#siteLogo .logowrap{float:left;width:23%}
+#siteLogo .logowrap img{height:auto;width:100%}
+#siteLogo a {float: left;font-size: 24px;text-decoration: none !important;padding-top:7px;line-height:19px}
+#header #siteLogo{ width:52%; clear: none;height:45px;margin:3px 0;padding-left: 10px;}
+.callus{display:none;}
+.userinfo-wrap{display:none;}
+#headerRightSectioBox {clear: none;float: right;margin-top: 7px;width:25%;}
+.menu{border:none;background:transparent; display: block;
+    float: left;
+    width:40%;margin: 6px;padding:0px}
+.menu span{width:25px;height:4px;background:#fff;display:block;margin-bottom:2px;}
+
+.callus-b {
+    display: block;
+    float: left;
+    width: 25%;margin-right:10px;
+}
+.callus-b img{width:100%;height:auto;}
+#headerRightSectioBox{margin-top:10px;}
+#helplineBox {
+    background: #d25665;
+    border-bottom: 1px solid #d25665;
+	border-top:none;
+    height: auto;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    text-align: right;
+    top:52px;
+    width: 100%;
+    z-index: 999999999;
+}
+.userinfo-wrap{   background: #0097a7 ;
+    border: 1px solid #1e8b96;
+    height: auto;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    text-align: right;
+    top:52px;
+    width: 100%;
+    z-index: 999999999;padding:10px 0;}
+
+#headerWrap span {
+    display: block;
+    font-size: 13px;
+    line-height: 15px;
+	float:left;
+}
+
+
+
+
+
+}
+@media screen and (min-width:480px) and (max-width:767px){
+	.col-md-6.bestCarRentalPrices{ margin-top:0%;}
+	#headerRightSectioBox {clear: none;float: right;height: auto;width:25%;}
+	#siteLogo a{font-size:28px}
+	#header #siteLogo{width:31%}
+	#helplineBox{margin: 0 3% 0 0;}
+	.headerLinks {font-size: 12px;}
+	.btn.btn-danger.btn-lg{float:right}
+	.row.we_offer .text-center.col-xs-6.col-sm-3 {width: 49%;}
+	.carlist.clist .clearfix .data_wrapper .details.clearfix .car_name{width: 100%;clear: both}
+	span.car_price, span.extras_cost {
+    float: left;
+    padding-left: 7px;
+    text-align: right;
+    width: 50%;}
+	span.car_price_int, span.extras_cost_int {
+    display: block;
+    float: left;
+    padding: 13px 0 0 15px;
+    text-align: left;
+    width: 50%;
+}
+.menu{border:none;background:transparent; display: block;
+    float: left;
+    width:40%;margin: 6px;padding:0px}
+.menu span{width:25px;height:4px;background:#fff;display:block;margin-bottom:2px;}
+.callus-b {
+    display: inline;
+    float: left;
+    width: 25%;margin-right:10px;
+}
+.callus-b img{width:100%;height:auto;}
+#header #siteLogo{ margin: 5px 0}
+#siteLogo .logowrap{float:left;width:23%}
+#siteLogo .logowrap img{height:auto;width:100%}
+#siteLogo a {float: left;font-size: 24px;text-decoration: none !important;padding-top:7px;line-height:19px}
+#header #siteLogo{ width:52%; clear: none;height:45px;margin:3px 0;padding-left: 10px;}
+#header #siteLogo {
+    clear: none;
+    height: 45px;
+    margin: 3px 0;
+    padding-left: 10px;
+    width:35%;
+}
+	
+}
+@media screen and (min-width:768px) and (max-width:1024px){
+	#header {width: 100%;}
+	#headerRightSectioBox{float:right; width: 50%;clear: none;}
+	#header #siteLogo{float:left;width: 23%;clear: none;}
+	.col-md-6.bestCarRentalPrices {margin-top: 10px;}
+	.tab-content {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+.headerLinks{ font-size: 14px;}
+#helplineBox{margin:0 8% 0 0}
+.helplineTitle{color: #333;font-size: 14px;}
+.footer_b .col-sm-3{ width: 32%;}
+.footer_b .container .row .col-xs-6.col-sm-4	{width:50%}	
+	
+	
+}
