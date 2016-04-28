@@ -2,3 +2,4 @@
 .project
 .settings/
 application/sql/
+application/config/
