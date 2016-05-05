@@ -203,7 +203,8 @@ $(document).ready(function() {
 		 var submitForm = validateForm('bookSignupForm');
 		 
 		 if(submitForm) {
-			 $.ajax({
+                        myApp.showPleaseWait();
+			$.ajax({
 				 url: siteUrl + "user/signup",
 				 type: "POST",
 				 data: {name: $name.val(), email: $email.val(), password: $pass.val(), mobile: $mobile.val(), address: $address.val(), book: true},
@@ -211,6 +212,7 @@ $(document).ready(function() {
 					 data = $.parseJSON(data);					 
 					 //if there is an error
 					 if(data.hasOwnProperty('error_msg')){
+                                                myApp.hidePleaseWait();
 						 $('#bookFormError').show();
 						 $.each(data.error_msg, function(k) {						
 							var field_id = 'book' + ucFirst(k);							
@@ -285,6 +287,7 @@ $(document).ready(function() {
 			 var $payBasic   = $('#payBasic');
 			 var $payAdvance = $('#payAdvance');
 			 var $payBalance = $('#payBal');
+                         myApp.showPleaseWait();
 			 $.ajax({
 				 url: siteUrl + "booking/paynow",
 				 type: "POST",
@@ -293,6 +296,7 @@ $(document).ready(function() {
 					 data = $.parseJSON(data);					 
 					 //if there is an error
 					 if(data.hasOwnProperty('error_msg')){
+                                                myApp.hidePleaseWait();
 						 $.each(data.error_msg, function(k) {						
 							var field_id = 'coupon' + ucFirst(k);							
 							$('#' + field_id + 'Block').addClass('has-error');

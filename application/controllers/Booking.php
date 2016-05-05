@@ -136,7 +136,8 @@ class Booking extends CI_Controller {
 					$this->db->trans_start();
 					$bookingId = $this->booking_model->addBooking($bookData);
 					if($bookingId) {
-						$orderId = 'PAR-'.$bookingId .'-'. $ride_sess['vr_id'] .'-'. $ride_sess['pickup'] .'-' . $ride_sess['ride_id'];
+						//$orderId = 'PAR-'.$bookingId .'-'. $ride_sess['vr_id'] .'-'. $ride_sess['pickup'] .'-' . $ride_sess['ride_id'];
+                                                $orderId = 'PAR-'.$bookingId;
 						$this->booking_model->updateOrder($bookingId, array('order_id' => $orderId));
 						$result = true;
 						$rideData = array();						
@@ -151,7 +152,7 @@ class Booking extends CI_Controller {
 					
 					if($bookingId) {	
 						$this->load->model('sendemails_model');
-						$email_data = array('username' => $user->first_name, 'order_id' => $bookingId, 'order_date' => '',
+						$email_data = array('username' => $user->first_name, 'order_id' => $orderId, 'order_date' => date('d-n-Y h:i', strtotime('now')),
 								'ride_name' => $valid_ride['ride_name'], 'ride_type' => $ride_sess['type'],
 								'ride_from' => $valid_ride['pickup'], 'ride_to' => $valid_ride['drop'],
 								'pickup_date' => $ride_sess['date'],'pickup_time' => $ride_sess['time'],
@@ -188,9 +189,9 @@ class Booking extends CI_Controller {
 				// Whoops, we don't have a page for that!
 				show_404();
 		}
-		if(empty($ride_sess['order_id'])) {
+		/*if(empty($ride_sess['order_id'])) {
 			redirect('/', 'refresh');
-		}	
+		}*/	
 		$this->session->unset_userdata('ride');
 		$this->load->model('booking_model');
 		$bookData = $this->booking_model->getBookingDetails($ride_sess['order_id']);

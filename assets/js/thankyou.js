@@ -27,10 +27,10 @@ $(document).ready(function() {
 			return false;
 		}
 		if($feedbackScore.val() <= 8) {
-			$('#feedbackImproveBlock').addClass('has-error');
+			//$('#feedbackImproveBlock').addClass('has-error');
 			$('#feedbackImproveSpan').show();
-			$('#feedbackImproveSpan').html('Please select a improvement');
-			return false;
+			//$('#feedbackImproveSpan').html('Please select a improvement');
+			//return false;
 		}
 		 $.ajax({
 			 url: siteUrl + "user/feedback_submit",

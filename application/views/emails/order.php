@@ -287,8 +287,9 @@
 																		style="Margin: 0; Margin-bottom: 10px; color: inherit; font-family: Helvetica, Arial, sans-serif; font-size: 30px; font-weight: 400; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: left; word-wrap: normal">Hello
 																		<?php echo $username; ?>,</h2>
 																	<p
-																		style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left">Thank
-																		you for booking with us. We’ll send a confirmation
+																		style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left">
+                                                                                                                                            <hr style="Margin: 20px auto; border-bottom: 1px solid #cacaca; border-left: 0; border-right: 0; border-top: 0; clear: both; height: 0; margin: 20px auto; max-width: 580px"/>
+                                                                                                                                            Thank you for booking with us. We’ll send a confirmation
 																		email shortly.</p>
 																	<table class="callout"
 																		style="Margin-bottom: 16px; border-collapse: collapse; border-spacing: 0; margin-bottom: 16px; padding: 0; text-align: left; vertical-align: top; width: 100%">

@@ -60,7 +60,7 @@ define('ADMIN_CANCELLED_ORDER', 'admin_cancelled_order');
 define('DATE_FORMAT', 'd-M-Y');
 define('PER_PAGE', '5');
 define('DEFAULT_SEO_TITLE', ' Car on rental');
-define('CACHE_VERSION', '1.0');
+define('CACHE_VERSION', '1.1');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

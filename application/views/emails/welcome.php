@@ -286,7 +286,8 @@
 																	style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 19px; margin: 0; padding: 0; text-align: left"><h2
 																		style="Margin: 0; Margin-bottom: 10px; color: inherit; font-family: Helvetica, Arial, sans-serif; font-size: 30px; font-weight: 400; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: left; word-wrap: normal">
                                                                                                                                                 Hello 	<?php echo $username; ?>,</h2>
-																	<p
+																	<hr style="Margin: 20px auto; border-bottom: 1px solid #cacaca; border-left: 0; border-right: 0; border-top: 0; clear: both; height: 0; margin: 20px auto; max-width: 580px"/>
+                                                                                                                                            <p
 																		style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left">
 																		Welcome to Pin A Ride<br>
 																		
