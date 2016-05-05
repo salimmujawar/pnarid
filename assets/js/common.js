@@ -94,9 +94,10 @@ $(document).ready(function() {
 						 });
 						 
 					 }else {
-						 $('#signUpForm').fadeOut(500, function(){
-				                $('#signUpFormSuccess').show();
-				          });
+						/*$('#signUpForm').fadeOut(500, function(){
+                                                    $('#signUpFormSuccess').show();
+                                                });*/
+                                                window.location.reload();
 					 }
 				 },
 				 error: function () {

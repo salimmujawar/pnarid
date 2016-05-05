@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">    
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="p:domain_verify" content="b0b76616fd7a7afb48ec971b5950c56c"/>
     <link rel="shortcut icon" href="<?php echo base_url('favicon.ico');?>" type="image/x-icon" />
     <title><?php echo (!empty($seo_title))?$seo_title:DEFAULT_SEO_TITLE;?></title>
     <meta name="description" content="<?php echo (!empty($seo_desc))?$seo_desc:'';?>"/>
@@ -90,9 +91,11 @@
 				<?php
 					$history = 'history';
 					$enquiry = 'enquiry';
+                                        $rides  = '';
 					if($grp_id == 1) {
 						$history = 'admin/booking/index';
 						$enquiry = 'admin/enquire/index';
+                                                $rides  = 'admin/rides/index';
 					}
 				?>			
 				<?php if(is_object($user) && !empty($user->first_name)) { ?>				
@@ -105,7 +108,7 @@
 				    	<?php if($grp_id ==1 ){?>
 				    		<li><a href="<?php echo base_url('admin/auth');?>">Users</a></li>
 				    		<li><a href="#">Coupons</a></li>
-				    		<li><a href="#">Rides</a></li>
+				    		<li><a href="<?php echo base_url($rides);?>">Rides</a></li>
 				    	<?php }else{ ?>				    	
 				    	<li><a href="#">Profile</a></li>
 				    	<?php } ?>

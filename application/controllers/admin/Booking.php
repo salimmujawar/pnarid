@@ -50,5 +50,7 @@ class Booking extends CI_Controller {
 		$this->load->view('templates/header', $data);
 		$this->load->view($user_type.'/'.$page, $data);
 		$this->load->view('templates/footer', $data);
-	}
+	} 
+        
+        
 }

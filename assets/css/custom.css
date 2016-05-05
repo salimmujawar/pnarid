@@ -1022,3 +1022,11 @@ h2.car_name, h2.extras_name{ margin: 0 0 5px;}
 	
 	
 }
+
+
+@media screen and (max-width:767px) {	
+.tab-content .tab-pane .col-md-6 .form-horizontal .form-group .col-sm-10 .input-group .form-control{height:30px}
+.tab-content .tab-pane .col-md-6 .form-horizontal .form-group .col-sm-10 .input-group .btn-group.bootstrap-select.input-group-btn.form-control .btn dropdown-toggle.btn-default{height:30px;}		
+.tab-content .tab-pane .col-md-6 .form-horizontal .form-group .col-sm-10 .input-group .btn-group.bootstrap-select.input-group-btn.form-control .btn.dropdown-toggle.btn-default{height:30px;font}
+.btn-group.bootstrap-select.input-group-btn.form-control .btn.dropdown-toggle.btn-default .filter-option.pull-left{font-size:14px;color:#666;}
+}	

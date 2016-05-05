@@ -473,7 +473,7 @@ if(is_object($user) && empty($user->first_name)) {
 								$label_full = $val['full'];
 								if($select_days && $select_pay) {
 									$label_full = round($val['full'] * $ride_sess['days']);
-								} 
+								}                                                                 
 							?>
 							<label class="inline" id="labelPay_<?php echo $val['vr_id']; ?>">Rs. <?php echo money_format('%!i', $label_full); ?>/-</label>
 						</span>
@@ -516,7 +516,7 @@ if(is_object($user) && empty($user->first_name)) {
 									<b>If you will use car/cab more than 2 day (s) and 575 Kms , extra charges as follows:  </b><br/> 
 										  After  575  Kms &  2 Day (s) : <br/>
 										+ <label class="WebRupee">Rs</label>  250 per day  driver charges. <br/>
-										+ <label class="WebRupee">Rs</label> 10.00 / Km <br/>
+										+ <label class="WebRupee">Rs</label> <?php echo $val['per_km']; ?> / Km <br/>
 									<br>
 							       	<?php } ?>
 									<b>Terms &amp; Conditions:</b><br> » One day means a one

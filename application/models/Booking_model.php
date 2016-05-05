@@ -182,15 +182,20 @@ class Booking_model extends CI_Model {
 		return $data;
 	}
 	
-	function getBookingDetails($orderId ) {
+	function getBookingDetails($orderId, $bookId = 0 ) {
 		$data = array();
-		if(!empty($orderId)) {
-			$this->db->select('b.*, f.city_name as from_city, t.city_name as to_city, u.email, u.phone');
+		if(!empty($orderId) || !empty($bookId)) {
+			$this->db->select('b.*, f.city_name as from_city, t.city_name as to_city, u.email, u.phone, u.first_name');
 			$this->db->from('booking b');
 			$this->db->join('master_city f', 'f.city_id = b.ride_from');
 			$this->db->join('master_city t', 't.city_id = b.ride_to');
 			$this->db->join('users u', 'u.id = b.user_id');
-			$this->db->where('b.order_id', $orderId);			
+			if(!empty($orderId)) {
+                            $this->db->where('b.order_id', $orderId);			
+                        }elseif(!empty($bookId)) {
+                            $this->db->where('b.b_id', $bookId);			
+                        }
+                        
 					
 			$query = $this->db->get();
 			//echo $this->db->last_query();

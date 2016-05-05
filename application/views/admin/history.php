@@ -7,6 +7,7 @@
 	        <table class="table table-bordered table-hover">		          
 	            <thead>
 	            <tr>
+                      <th>Book Id</th>
 	              <th>Order Id</th>
 	              <th>Ride</th>
 	              <th>Coupon</th>
@@ -27,6 +28,7 @@
 	          <tbody>
 	          	<?php foreach($book_list as $key => $book) { ?>
 	            <tr>
+                      <td><?php echo $book->b_id;?></td>
 	              <td><?php echo $book->order_id;?></td>
 	              <td><?php echo $book->ride_name;?></td>
 	              <td><?php echo $book->coupon;?></td>

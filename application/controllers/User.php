@@ -56,21 +56,33 @@ class User extends CI_Controller {
             		'last_name'  => (!empty($name[1]))?$name[1]:'',            		
             		'phone'      => $this->input->post('mobile'),
             		'address'    => (isset($_POST['address']))?$this->input->post('address'):'',
-            );            
-            if($this->ion_auth->register($identity, $password, $email, $additional_data)) {
+            ); 
+            $id = $this->ion_auth->register($identity, $password, $email, $additional_data);
+            if($id) {                
             	//maintain the session            	
             	$ride_sess = $this->session->userdata('ride');
             	if(sizeof($ride_sess) > 0 && $this->input->post('book')) {
             		$ride_sess['step'] = 3;
             		$this->session->set_userdata($ride_sess);
             	}
+                
             	//login user after signup
             	if ($this->ion_auth->login($this->input->post('email'), $this->input->post('password')))
             	{
+                        $user = $this->ion_auth->user()->row();
+                        $username = (!empty($user->username)) ? $user->username : $user->first_name;                      
+                        
+                        //send an welcome email
+                        $this->load->model('sendemails_model');
+                        $user_data = array('username' => $username);
+                        $this->sendemails_model->htmlmail($user->email, 'Welcome, ' . $username . ' to Pin A Ride', 'welcome', $user_data);
+                        
             		echo json_encode(array('result' => 'success'));
+                        exit;
             	}				
             }else{
             	echo json_encode(array( 'result' => 'error', 'error_res' => 'Transaction failed.'));
+                exit;
             }
 		}
 	}
@@ -181,6 +193,7 @@ class User extends CI_Controller {
 		if ($this->form_validation->run() == FALSE)
 		{
 			echo json_encode(array( 'result' => 'error', 'error_msg' => $this->form_validation->error_array()));
+                        exit;
 		}
 		else
 		{
@@ -191,11 +204,21 @@ class User extends CI_Controller {
 			$campange = $this->input->post('campange');
 			$this->load->model('user_model');
 			if($this->user_model->add_enquiry(array('name' => $name, 'email' => $email, 'phone' => $mobile, 'enquiry' => $enquiry, 'campaign' => $campange))) {
+                                
+                                //send an welcome email
+                                $this->load->model('sendemails_model');
+                                $user_data = array('name' => $name, 'provider' => $campange,
+                                					'phone' => $mobile, 'email' => $email,
+                                					'content' => $enquiry
+                                				);
+                                $this->sendemails_model->htmlmail('pinaride@gmail.com', 'Enquiry for Pin A Ride by ' . ucwords($name), 'enquiry', $user_data);
 				echo json_encode(array('result' => 'success'));
+                                exit;
 			}
 			else
 			{
-				echo json_encode(array( 'result' => 'error', 'error_res' => 'Transaction error'));					
+				echo json_encode(array( 'result' => 'error', 'error_res' => 'Transaction error'));
+                                exit;
 			}
 		}	
 	}

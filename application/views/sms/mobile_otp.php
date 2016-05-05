@@ -1,0 +1,1 @@
+Your verification code is <?php echo $code; ?>.

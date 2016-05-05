@@ -483,7 +483,7 @@ function search_rides($step) {
 								       			'<b>If you will use car/cab more than 2 day (s) and 575 Kms , extra charges as follows:  </b><br/>' + 
 								       			'After  575  Kms &  2 Day (s) : <br/>' +
 								       			'+ <label class="WebRupee">Rs</label>  250 per day  driver charges. <br/>'+
-								       			'+ <label class="WebRupee">Rs</label> 10.00 / Km <br/><br>';
+								       			'+ <label class="WebRupee">Rs</label> ' + val.per_km + ' / Km <br/><br>';
 							       	}
 							      	rides_li += '<b>Terms &amp; Conditions:</b><br> » One day means a one' +
 											'calendar day ( from midnight 12 to midnight 12 ).<br>» Toll' +
