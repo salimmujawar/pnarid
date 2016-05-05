@@ -21,6 +21,7 @@
 	              <th>Contact</th>
 	              <th>Vendor</th>
 	              <th>Contact</th>
+                      <th>Status</th>
 	              <th>PG Status</th>
 	              <th>Book date</th>	              
 	            </tr>
@@ -42,6 +43,7 @@
 	              <td><?php echo $book->cust_phone;?></td>	 
 	              <td><?php echo $book->cust_name;?></td>
 	              <td><?php echo $book->vend_phone;?></td>
+                      <td><?php echo ($book->status)?'Successful':'Cancelled';?></td>
 	              <td><?php echo $book->payment_status;?></td>	               
 	              <td><?php echo date(DATE_FORMAT, strtotime($book->cdate));?></td>
 	            </tr>

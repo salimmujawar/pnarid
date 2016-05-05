@@ -240,7 +240,7 @@ class Booking extends CI_Controller {
 			
 			$bookData = $this->booking_model->getBookingDetails($orderId);
 			//check if the users is same and the cancelation is not passed the booking date
-			if(!empty($bookData->pickup_datetime)) {
+			if(!empty($bookData->pickup_datetime) && $bookData->status != 0) {
 				$pickupDate = strtotime($bookData->pickup_datetime);
 				if($bookData->email != $email) {
 					echo json_encode(array( 'result' => 'error', 'error_resp' => "Invalid email"));
@@ -251,10 +251,14 @@ class Booking extends CI_Controller {
 					return false;
 				}				
 				//update booking table
-				$this->booking_model->updateBooking($orderId, array('reason' => $reason, 'cancelled_date' => date('Y-m-d h:i:s', strtotime('now'))));
+				$this->booking_model->updateBooking($orderId, array('status'=> 'Cancelled', 'reason' => $reason, 'cancelled_date' => date('Y-m-d h:i:s', strtotime('now'))));
+                                //send an email about order cancellation
+                                $this->load->model('sendemails_model');
+                                $email_data = array('username' => $bookData->first_name, 'order_id' => $orderId);
+                                $this->sendemails_model->htmlmail($bookData->email, 'Pin A Ride, Order ' . $orderId . ' Cancelled', 'cancellation', $email_data);
 				echo json_encode(array( 'result' => 'success'));
 			}else {
-				echo json_encode(array( 'result' => 'error', 'error_resp' => "Invalid orderId"));
+				echo json_encode(array( 'result' => 'error', 'error_resp' => "Invalid Order please check history"));
 			}
 			
 		}
@@ -269,7 +273,13 @@ class Booking extends CI_Controller {
 			// Whoops, we don't have a page for that!
 			show_404();
 		}
-	
+                $email = '';
+                if($this->ion_auth->logged_in()) {                    
+                    $user = $this->ion_auth->user()->row();
+                    $email = $user->email;
+		}
+		
+                $data['email'] = $email;
 		$data['js_files'] = array('cancellation');
 		$data['title'] = ucfirst($page); // Capitalize the first letter
 		$data['seo_title']  = 'Car and Cab Rental Services in Mumbai | Mumbai to Pune';

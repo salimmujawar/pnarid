@@ -29,8 +29,8 @@
 	              <td><?php echo date(DATE_FORMAT, strtotime($book->pickup_datetime));?></td>
 	              <td><?php echo $book->from_city;?></td>
 	              <td><?php echo $book->to_city;?></td>      
+                      <td><?php echo ($book->status)?'Successful':'Cancelled';?></td>
 	              <td><?php echo date(DATE_FORMAT, strtotime($book->cdate));?></td>
-	              <td><?php echo $book->payment_status;?></td>
 	            </tr>
 	            <?php }?>	            
 	          </tbody>		          

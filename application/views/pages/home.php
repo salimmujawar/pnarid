@@ -219,10 +219,10 @@ if(is_object($user) && empty($user->first_name)) {
 					<span class="image"><img src="<?php echo base_url('assets/images/mumbaidarshan_120X120.jpg');?>"
 								alt="Car on rent for mumbai darshan">
 					</span> 
-					 <span class="best-car"> 
-						   <span class="carclass">Mumbai Darshan</span> 
+					 <span class="best-car"> 						   
 							<!-- span class="passengers bags"> 4 Adults, ₹ 1,600</span--> 
 							<span class="price"><span>Car on rent for</span></span> 
+                                                        <span class="carclass">Mumbai Darshan</span> 
 							<span class="btn btn-primary">Select</span>
 					</span>
 				</a></li>
@@ -232,10 +232,10 @@ if(is_object($user) && empty($user->first_name)) {
 					<span class="image"><img src="<?php echo base_url('assets/images/Mahableshwar_120X120.png');?>"
 								alt="Car on rent for mahabaleshwar">
 					</span> 
-					 <span class="best-car"> 
-						   <span class="carclass">Mahabaleshwar</span> 
+					 <span class="best-car"> 						    
 							<!-- span class="passengers bags"> 4 Adults, ₹ 1,600</span--> 
 							<span class="price"><span>Car on rent for</span></span> 
+                                                        <span class="carclass">Mahabaleshwar</span>
 							<span class="btn btn-primary">Select</span>
 					</span>
 				</a></li>
@@ -245,10 +245,10 @@ if(is_object($user) && empty($user->first_name)) {
 					<span class="image"><img src="<?php echo base_url('assets/images/khandala_120X120.jpg');?>"
 								alt="Car on rent for khandala">
 					</span> 
-					 <span class="best-car"> 
-						   <span class="carclass">Khandala</span> 
+					 <span class="best-car"> 						   
 							<!-- span class="passengers bags"> 4 Adults, ₹ 1,600</span--> 
 							<span class="price"><span>Car on rent for</span></span> 
+                                                        <span class="carclass">Khandala</span> 
 							<span class="btn btn-primary">Select</span>
 					</span>
 				</a></li>
@@ -258,10 +258,10 @@ if(is_object($user) && empty($user->first_name)) {
 					<span class="image"><img src="<?php echo base_url('assets/images/imagica_120X120.jpg');?>"
 								alt="Car on rent for imagica">
 					</span> 
-					 <span class="best-car"> 
-						   <span class="carclass">Imagica</span> 
+					 <span class="best-car"> 						   
 							<!-- span class="passengers bags"> 4 Adults, ₹ 1,600</span--> 
 							<span class="price"><span>Car on rent for</span></span> 
+                                                        <span class="carclass">Imagica</span> 
 							<span class="btn btn-primary">Select</span>
 					</span>
 				</a></li>
@@ -271,10 +271,10 @@ if(is_object($user) && empty($user->first_name)) {
 					<span class="image"><img src="<?php echo base_url('assets/images/alibaug_120X120.jpg');?>"
 								alt="Car on rent for alibaug">
 					</span> 
-					 <span class="best-car"> 
-						   <span class="carclass">Alibaug</span> 
+					 <span class="best-car"> 						   
 							<!-- span class="passengers bags"> 4 Adults, ₹ 1,600</span--> 
 							<span class="price"><span>Car on rent for</span></span> 
+                                                        <span class="carclass">Alibaug</span>
 							<span class="btn btn-primary">Select</span>
 					</span>
 				</a></li>
@@ -284,10 +284,10 @@ if(is_object($user) && empty($user->first_name)) {
 					<span class="image"><img src="<?php echo base_url('assets/images/kolad_120X120.jpg');?>"
 								alt="Car on rent for kolad">
 					</span> 
-					 <span class="best-car"> 
-						   <span class="carclass">Kolad</span> 
+					 <span class="best-car"> 						   
 							<!-- span class="passengers bags"> 4 Adults, ₹ 1,600</span--> 
 							<span class="price"><span>Car on rent for</span></span> 
+                                                        <span class="carclass">Kolad</span> 
 							<span class="btn btn-primary">Select</span>
 					</span>
 				</a></li>

@@ -370,6 +370,7 @@ select.car_count { display: inline-block; width: 85px; margin-top: 1em }
 }
 .bestCarRentalPrices li a .carclass {
   top: 21px;
+  padding-bottom: 4px;
   left: 0;
   color: #000;
   font-weight: 600;

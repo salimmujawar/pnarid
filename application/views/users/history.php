@@ -26,7 +26,7 @@
 	              <td><?php echo money_format('%!i', $book->paid);?></td>
 	              <td><?php echo money_format('%!i', $book->due);?></td>
 	              <td><?php echo date(DATE_FORMAT, strtotime($book->pickup_datetime));?></td>
-	              <td><?php echo $book->payment_status;?></td>
+	              <td><?php echo ($book->status)?'Successful':'Cancelled';?></td>
 	              <td><?php echo date(DATE_FORMAT, strtotime($book->cdate));?></td>	              
 	              <?php if($book->due > 0) {?>
 	              	<!-- td><button type="button" class="btn btn-danger">Pay</button></td-->

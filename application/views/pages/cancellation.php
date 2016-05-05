@@ -3,7 +3,7 @@
 </div>
 <div class="bs-example" data-example-id="basic-forms"> 
 	<div id="cancelFormSuccess" class="alert alert-success" style="display:none;">
-	  <strong>Success!</strong> Registeration completed succesfully.
+	  <strong>Success!</strong> Cancellation process initiated.
 	</div>
 	<div id="cancelFormError" class="alert alert-danger" style="display:none;">
 	  <strong>Error! </strong> <span id="cancelErr">Please correct the errors.</span>
@@ -16,7 +16,7 @@
             	   <span class="input-group-addon">
                      <span class="glyphicon glyphicon-envelope"></span>
                    </span>
-	               <input type="text" class="form-control" data-validate="required, email" name="cancelEmail" id="cancelEmail" maxlength="50" placeholder="Email" value=""/>
+	               <input type="text" class="form-control" data-validate="required, email" name="cancelEmail" id="cancelEmail" maxlength="50" placeholder="Email" value="<?php echo $email; ?>"/>
               
 	            </div>
                <span id="cancelEmailSpan" class="help-block"></span>

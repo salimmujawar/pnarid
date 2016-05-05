@@ -125,7 +125,7 @@ class Home extends CI_Controller {
 		$data['valid_ride'] = $valid_ride;
 		$data['category_page'] = $category_page;
 		$data['cms'] = $cms;
-		$data['current_date'] = date('m/d/Y');
+		$data['current_date'] = date('m/d/Y', strtotime('+1 days'));
 		$hour = date('h', strtotime('+2 hours'));
 		$minute = (date('i')>30)?'30':'00';
 		$meridiem = date('A');
