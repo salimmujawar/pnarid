@@ -30,7 +30,7 @@ class Vendor_ride_model extends CI_Model {
 	public function getAllVendorRides($params = array()) {
 		$data = array();
 		if(!empty($params['pickup'])) {
-			$this->db->select('r.ride_name, r.ride_id, r.seats, r.url, vr.per_km, vr.vr_id');
+			$this->db->select('r.ride_name, r.ride_id, r.seats, r.url, vr.per_km, vr.vr_id, vr.local_rent');
 			$this->db->from('rides r');
 			$this->db->join('vendor_rides vr', 'r.ride_id = vr.ride_id');			
 			$this->db->where('vr.city_id', $params['pickup']);

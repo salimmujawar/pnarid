@@ -34,6 +34,7 @@ class Booking_model extends CI_Model {
 			}
 			$vendor_ride  = $this->vendor_ride_model->getVendorRide('', array('vr_id' => $params['vr_id']));
 			$vendor_ride  = $vendor_ride['rows'];
+                        
 			if(!empty($pickupLatLong->city_lat) && !empty($dropLatLong->city_lat) && $params['type'] != 'local') {				
 				//print_r($pickupLatLong);
 				//$distance 	   = round(distance($pickupLatLong->city_lat, $pickupLatLong->city_long, $dropLatLong->city_lat, $dropLatLong->city_long, "K"), 2);
@@ -59,14 +60,20 @@ class Booking_model extends CI_Model {
 				$code     = 0;
 				$days     = $params['days'];
 				
-				$full_pay = round(($distance * $vendor_ride->per_km) * $days, 2);
+				
+                                if ($params['type'] == 'local') {
+                                    $full_pay = $vendor_ride->local_rent;
+                                }else {
+                                    $full_pay = round(($distance * $vendor_ride->per_km) * $days, 2);
+                                }
+                                
 				if($params['pay'] == 'advance') {
 					$adv_pay  = round(($full_pay / 100) * $percent, 2);
 					$balance  = round($full_pay - $adv_pay, 2);
 				}else{
 					$adv_pay  = $full_pay;
 				}
-	
+                                
 				if($balance > 0 && APPLY_SERVICE_TAX) {
 					$balance = round($balance + SERVICE_TAX);
 				}

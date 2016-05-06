@@ -160,7 +160,8 @@ class Booking extends CI_Controller {
 								'basic_fare' => $valid_ride['basic'], 'advance_fare' => $valid_ride['advance'],
 								'balance_fare' => $valid_ride['balance'],	'total_fare' => $valid_ride['total']
 						);
-						$this->sendemails_model->htmlmail($user->email, 'Your Order place with Pin A ride', 'order', $email_data);
+						$this->sendemails_model->htmlmail($user->email, 'Your Order place with Pin A Ride', 'order', $email_data);
+                                                $this->sendemails_model->htmlmail(NOTIFY_EMAIL, 'Order place with Pin A Ride', 'order', $email_data);
 						echo json_encode(array( 'result' => 'success'));
 						die;
 					}else{

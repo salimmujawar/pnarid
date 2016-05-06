@@ -297,6 +297,9 @@ $(document).ready(function() {
 					 //if there is an error
 					 if(data.hasOwnProperty('error_msg')){
                                                 myApp.hidePleaseWait();
+                                                $('#bookError').fadeIn(500, function(){
+                                                    $('#bookError').fadeOut(3000);
+                                                });
 						 $.each(data.error_msg, function(k) {						
 							var field_id = 'coupon' + ucFirst(k);							
 							$('#' + field_id + 'Block').addClass('has-error');
@@ -329,6 +332,7 @@ function paying(key) {
 	var $jType   = $('input[name=journeyType]:checked', '#journeyStep1Form');
 	if($jType.val() == 'local') {
 		daysVal = $('#rideLocalDay').val();
+                days = 1;
 	}else {
 		daysVal = days;
 	}
@@ -478,16 +482,16 @@ function search_rides($step) {
 									       	'Total Fare :  ' + val.full + '/-<br>' +
 									       	'Minimum	charged hour / distance per day : 8 Hours / 80 Kms <br><br>' +
 										'<b>If you will use car/cab more than 8 hours / 80 kms , extra' +
-											'charges as follows: </b><br> After 8 Hours / 80 Kms : <br>+ 90' +
-										'/ Hour <br>+ <label class="WebRupee">Rs</label> 10.00 / Km <br><br>';
+											'charges as follows: </b><br> After 8 Hours / 80 Kms : <br>' +
+										'+ <label class="WebRupee">Rs</label> ' + val.per_km + ' / Km <br> + 100/ Hour <br><br>';
 									 }else if($jType.val() == 'outstation') {
 										 rides_li += '<b>Fare Details</b><br/>' + 							       	
 								       			'Approx. Roundtrip distance :  ' + val.distance + 'Kms.<br/>' +							       	
-								       			'Minimum charged distance :  250 Kms / Day  <br/> <br>' +
-								       			'<b>If you will use car/cab more than 2 day (s) and 575 Kms , extra charges as follows:  </b><br/>' + 
-								       			'After  575  Kms &  2 Day (s) : <br/>' +
-								       			'+ <label class="WebRupee">Rs</label>  250 per day  driver charges. <br/>'+
-								       			'+ <label class="WebRupee">Rs</label> ' + val.per_km + ' / Km <br/><br>';
+								       			'Minimum charged distance :  300 Kms / Day  <br/> <br>' +
+								       			'<b>If you will use car/cab more than 1 day (s) and ' + val.distance + ' Kms , extra charges as follows:  </b><br/>' + 								       			
+								       			'+ <label class="WebRupee">Rs</label> ' + val.per_km + ' / Km <br/>'+
+                                                                                        '+ <label class="WebRupee">Rs</label>  300 per day  driver charges. <br/><br>';
+								       			
 							       	}
 							      	rides_li += '<b>Terms &amp; Conditions:</b><br> » One day means a one' +
 											'calendar day ( from midnight 12 to midnight 12 ).<br>» Toll' +

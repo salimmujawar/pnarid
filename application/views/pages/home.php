@@ -505,20 +505,22 @@ if(is_object($user) && empty($user->first_name)) {
 									       	Minimum	charged hour / distance per day : 8 Hours / 80 Kms <br>							       	
 										<br>
 										<b>If you will use car/cab more than 8 hours / 80 kms , extra
-											charges as follows: </b><br> After 8 Hours / 80 Kms : <br>+ 90
-										/ Hour <br>+ <label class="WebRupee">Rs</label> 10.00 / Km <br>
+											charges as follows: </b><br> After 8 Hours / 80 Kms : <br>
+                                                                                        + <label class="WebRupee">Rs</label> <?php echo $val['per_km']; ?> / Km <br/>
+                                                                                        + 100/ Hour <br>
+                                                                                        
 										<br>
 									<?php }elseif(!empty($ride_sess['type']) && $ride_sess['type'] == 'outstation') { ?>
-									<b>Fare Details</b><br/> 							       	
-								       	Approx. Roundtrip distance :  <?php echo $val['distance'];?> Kms.<br/>							       	
-										Minimum charged distance :  250 Kms / Day  <br/>							       	
-									<br>
-									<b>If you will use car/cab more than 2 day (s) and 575 Kms , extra charges as follows:  </b><br/> 
-										  After  575  Kms &  2 Day (s) : <br/>
-										+ <label class="WebRupee">Rs</label>  250 per day  driver charges. <br/>
-										+ <label class="WebRupee">Rs</label> <?php echo $val['per_km']; ?> / Km <br/>
-									<br>
-							       	<?php } ?>
+                                                                                <b>Fare Details</b><br/> 							       	
+                                                                                Approx. Roundtrip distance :  <?php echo $val['distance'];?> Kms.<br/>							       	
+                                                                                        Minimum charged distance :  <?php echo OUTSTATION_DEFAULT_KM; ?> Kms / Day  <br/>							       	
+                                                                                <br>
+                                                                                <b>If you will use car/cab more than 1 day (s) and <?php echo $val['distance'];?> Kms , extra charges as follows:  </b><br/>                                                                                           
+                                                                                    + <label class="WebRupee">Rs</label> <?php echo $val['per_km']; ?> / Km <br/>        
+                                                                                    + <label class="WebRupee">Rs</label>  300 per day  driver charges. <br/>
+                                                                                        
+                                                                                <br>
+                                                                        <?php } ?>
 									<b>Terms &amp; Conditions:</b><br> » One day means a one
 									calendar day ( from midnight 12 to midnight 12 ).<br>» Toll
 									taxes, parkings, state taxes paid by customer wherever is
@@ -690,6 +692,7 @@ if(is_object($user) && empty($user->first_name)) {
 			<div class="col-md-6">
 				<h3>Booking Details</h3>
 				<hr />
+                                <div id="bookError" style="display:none;" class="alert alert-danger" role="alert">Oh snap! Change a few things up and try submitting again.</div>
 				<h4 id="rideName"><?php echo (!empty($valid_ride['ride_name'])) ? $valid_ride['ride_name'] : '';?></h4>
 				<span id="fromTo">
 					<?php echo (!empty($valid_ride['pickup']))?'From '.$valid_ride['pickup']:'';?>

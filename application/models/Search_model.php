@@ -48,7 +48,11 @@ class Search_model extends CI_Model {
 		
 			$percent  = ADVANCE_PAY_PERC;
 			foreach ($rides['rows'] as $key => $val) {
-				$full_pay = round($distance * $val->per_km);
+                                if ($params['type'] == 'local') {
+                                    $full_pay = $val->local_rent;
+                                }else {
+                                    $full_pay = round($distance * $val->per_km);
+                                }
 				$adv_pay  = round(($full_pay / 100) * $percent);
 				/*$jsonData[] = array('ride_name' => $val->ride_name, 'ride_id' => $val->ride_id, 'vr_id' => $val->vr_id
 						, 'per_km' => $val->per_km, 'seats' => $val->seats, 'full' => $full_pay, 'advance' => $adv_pay);
