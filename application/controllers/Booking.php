@@ -135,13 +135,17 @@ class Booking extends CI_Controller {
 					$result = FALSE;
 					$this->db->trans_start();
 					$bookingId = $this->booking_model->addBooking($bookData);
+                                        
 					if($bookingId) {
 						//$orderId = 'PAR-'.$bookingId .'-'. $ride_sess['vr_id'] .'-'. $ride_sess['pickup'] .'-' . $ride_sess['ride_id'];
                                                 $orderId = 'PAR-'.$bookingId;
 						$this->booking_model->updateOrder($bookingId, array('order_id' => $orderId));
 						$result = true;
 						$rideData = array();						
-						$rideData =  array( 'ride' => $ride_sess + array('order_id' => $orderId));
+						$rideData =  array( 'ride' => $ride_sess + array('order_id' => $orderId, 'basic' => $bookData['basic'],
+                                                                                                  'ride_name' => $bookData['ride_name'], 'type' => $bookData['type']
+                                                                                                )
+                                                                    );
 						$this->session->set_userdata($rideData);
 					}
 					if($result) {
@@ -150,18 +154,7 @@ class Booking extends CI_Controller {
 						$this->db->trans_rollback();
 					}
 					
-					if($bookingId) {	
-						$this->load->model('sendemails_model');
-						$email_data = array('username' => $user->first_name, 'order_id' => $orderId, 'order_date' => date('d-n-Y h:i a', strtotime('now')),
-								'ride_name' => $valid_ride['ride_name'], 'ride_type' => $ride_sess['type'],
-								'ride_from' => $valid_ride['pickup'], 'ride_to' => $valid_ride['drop'],
-								'pickup_date' => $ride_sess['date'],'pickup_time' => $ride_sess['time'],
-								'numbers_days' => $ride_sess['days'], 'numbers_ride' => 1,
-								'basic_fare' => $valid_ride['basic'], 'advance_fare' => $valid_ride['advance'],
-								'balance_fare' => $valid_ride['balance'],	'total_fare' => $valid_ride['total']
-						);
-						$this->sendemails_model->htmlmail($user->email, 'Your Order place with Pin A Ride', 'order', $email_data);
-                                                $this->sendemails_model->htmlmail(NOTIFY_EMAIL, 'Order place with Pin A Ride', 'order', $email_data);
+					if($bookingId) {							
 						echo json_encode(array( 'result' => 'success'));
 						die;
 					}else{
@@ -180,6 +173,40 @@ class Booking extends CI_Controller {
 		}
 		
 	}
+        
+        function failure() {
+            $page = 'failure';
+            $data = array();
+            $this->load->view('templates/header', $data);
+            $this->load->view('pages/'.$page, $data);
+            $this->load->view('templates/footer', $data);
+        }
+        
+        function pg_post() {
+            $ride_sess = $this->session->userdata('ride');	
+            $page = 'pg_post';
+            
+            if ($ride_sess['step'] == 2 && $this->ion_auth->logged_in()) {
+                $user    = $this->ion_auth->user()->row();
+                $this->load->model('payu_model');                                        
+                $post_data = array('txnid' => $ride_sess['order_id'], 'amount' => $ride_sess['basic'],
+                                    'firstname' => $user->first_name, 'email' => $user->email,
+                                    'phone' => $user->phone, 'productinfo' => $ride_sess['type'] . ' ' . $ride_sess['ride_name']
+                                );
+                $pg_form_data = $this->payu_model->post_data($post_data);
+                
+                $data['posted'] = $pg_form_data; 
+                $data['title'] = ucfirst($page); // Capitalize the first letter
+                $this->load->view('templates/header', $data);
+		$this->load->view('pages/'.$page, $data);
+		$this->load->view('templates/footer', $data);
+                             
+            }else{
+                $this->session->unset_userdata('ride');
+                redirect('/faliure');
+            }
+            
+        }
 	
 	function thankyou() {
 		$ride_sess = $this->session->userdata('ride');		
@@ -197,7 +224,23 @@ class Booking extends CI_Controller {
 		$this->load->model('booking_model');
 		$bookData = $this->booking_model->getBookingDetails($ride_sess['order_id']);
 		$data['book_data'] = $bookData;
-		$user = $this->ion_auth->user()->row();		
+		$user = $this->ion_auth->user()->row();	
+                //print_r($bookData);
+                $this->load->model('sendemails_model');
+                $this->load->model('sendsms_model');
+                $email_data = array('username' => $user->first_name, 'order_id' => $bookData->order_id, 'order_date' => date('d-n-Y h:i a', strtotime($bookData->cdate)),
+                                'ride_name' => $bookData->ride_name, 'ride_type' => $bookData->rent_type,
+                                'ride_from' => $bookData->from_city, 'ride_to' => $bookData->to_city,
+                                'pickup_date' => date('d-n-Y', strtotime($bookData->pickup_datetime)),'pickup_time' => date('h:i a', strtotime($bookData->pickup_datetime)),
+                                'numbers_days' => $bookData->days, 'numbers_ride' => $bookData->rides,
+                                'basic_fare' => $bookData->basic, 'advance_fare' => $bookData->basic,
+                                'balance_fare' => $bookData->due,	'total_fare' => $bookData->total
+                );
+                $this->sendemails_model->htmlmail($user->email, 'Your Order place with Pin A Ride', 'order', $email_data);
+                $this->sendemails_model->htmlmail(NOTIFY_EMAIL, 'Order place with Pin A Ride', 'order', $email_data);
+                $sms_data = array('order_id' => $bookData->order_id);
+                $this->sendsms_model->sendmsg($user->phone, 'order_thanks', $sms_data);
+                
 		$data['user'] = $user;
 		$data['js_files'] = array('thankyou');
 		$data['title'] = ucfirst($page); // Capitalize the first letter

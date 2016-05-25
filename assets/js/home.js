@@ -1,4 +1,17 @@
-$(document).ready(function() {	
+$(document).ready(function() {
+        $('#signinPassword').bind('keypress', function(e){            
+            if(e.which === 13) { // return
+               $('#signIn').trigger('click');
+            }
+        });
+        
+        $('#signupMobile').bind('keypress', function(e){             
+            if(e.which === 13) { // return
+               $('#signUp').trigger('click');
+            }
+        });
+        
+        
 	$('.journeyType').click(function() {
 		var $jType   = $('input[name=journeyType]:checked', '#journeyStep1Form');
 		$('#journeyLocal').val('');
@@ -308,7 +321,7 @@ $(document).ready(function() {
 						 });
 						 
 					 }else if(data.result == "success") {
-						 window.location = siteUrl + 'thankyou';					 
+						 window.location = siteUrl + 'pg-post';					 
 					 }
 				 },
 				 error: function () {

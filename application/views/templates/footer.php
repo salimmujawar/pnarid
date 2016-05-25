@@ -114,7 +114,7 @@
 							</div>
 						</div>
 						<div class="col-sm-offset-2">
-							<button type="button" id="signIn" class="btn btn-danger">Submit</button>
+							<button type="button" id="signIn" class="btn btn-danger" >Submit</button>
 						</div>
 					</form>
 				</div>

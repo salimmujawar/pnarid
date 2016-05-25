@@ -120,9 +120,9 @@ class Booking_model extends CI_Model {
 		
 		$this->db->select('count(*) as count');
 		$this->db->from('booking b');
-		$this->db->join('master_city f', 'f.city_id = b.ride_from');
-		$this->db->join('master_city t', 't.city_id = b.ride_to');
-		$this->db->join('users u', 'u.id = b.user_id');
+		$this->db->join('master_city f', 'f.city_id = b.ride_from', 'left');
+		$this->db->join('master_city t', 't.city_id = b.ride_to', 'left');
+		$this->db->join('users u', 'u.id = b.user_id', 'left');
 		if(is_array($where) && sizeof($where) > 0) {
 			foreach($where as $key => $val) {
 				$this->db->where($key, $val);

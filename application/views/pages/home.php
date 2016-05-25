@@ -153,30 +153,10 @@ if(is_object($user) && empty($user->first_name)) {
 						<span id="journeyDateSpan" class="help-block"></span>
 					</div>
 				</div>
-				<!-- div id="journeyDayBlock" class="form-group">
-            <label for="drop" class="col-sm-2 control-label">Days: </label>
-            <div class="col-sm-10">
-                  <select class="form-control" data-validate="required" name="journeyDay" id="journeyDay">
-                     <option value="1">1 day</option>
-                     <option value="2">2 day</option>
-                     <option value="3">3 day</option>
-                     <option value="4">4 day</option>
-                     <option value="5">5 day</option>
-                  </select>
-                  <span id="journeyDaySpan" class="help-block"></span>
-            </div>
-         </div-->
+	
 				<div id="journeyTimeBlock" class="form-group">
 					<label for="journeyTime" class="col-sm-2 control-label">Time: </label>
-					<!-- div class="col-sm-10">
-                  <div class='input-group date' id='timepick'>
-                     <input type='text' class="form-control" data-validate="required" name="journeyTime" id="journeyTime"/>
-                     <span class="input-group-addon">
-                     <span class="glyphicon glyphicon-time"></span>
-                     </span>
-                  </div>
-                  <span id="journeyTimeSpan" class="help-block"></span>
-            </div-->
+	
 					<div class="col-sm-10">
 						<div class='input-group'>
 							<span class="input-group-addon"> <span
@@ -325,26 +305,7 @@ if(is_object($user) && empty($user->first_name)) {
 		class="tab-pane <?php echo (isset($ride_sess['step']) &&  $ride_sess['step'] == 1)?'active':'';?>"
 		id="vehicle">
 		<div class="row">
-			<!-- div class="filter fil-1 col-md-6">
-            <label for="car_type">Type:</label>
-            <select id="car_type" class="form-control car_type">
-               <option value="-1" selected="selected">Any</option>
-               <option value="cargo-van">Cargo van</option>
-               <option value="fuel-efficient-hybrid">Fuel efficient &amp; hybrid</option>
-               <option value="moving-truck">Moving truck</option>
-               <option value="reservable-models">Reservable models</option>
-            </select>
-         </div>
-         <div class="filter fil-3 col-md-6">
-            <label for="car_sort">Sort:</label>
-            <select id="car_sort" class="form-control car_sort">
-               <option value="-1">Latest first</option>
-               <option value="price-low">Price: low to high</option>
-               <option value="price-high">Price: high to low</option>
-               <option value="name-asc">Name: ascending</option>
-               <option value="name-desc">Name: descending</option>
-            </select>
-         </div-->
+	
 		</div>
 		<div class="list_wrapper">
 			<script type="text/javascript">
@@ -651,8 +612,7 @@ if(is_object($user) && empty($user->first_name)) {
 									class="glyphicon glyphicon-phone"></span>
 								</span> <input type="text" class="form-control"
 									data-validate="required" name="bookMobile" id="bookMobile"
-									maxlength="50" placeholder="Enter Mobile number" value="" />
-
+									maxlength="50" placeholder="Enter Mobile number" value="" />                                                                        
 							</div>
 							<span id="bookMobileSpan" class="help-block"></span>
 						</div>

@@ -1,6 +1,7 @@
 .buildpath
 .project
 .settings/
+backup/
 application/sql/
 application/config/
 application/models/Sendemails_model.php
