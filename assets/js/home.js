@@ -475,6 +475,7 @@ function search_rides($step) {
 							 <ul class="car_properties" id="car_properties_17">\
 								<li class="glyphicon glyphicon-user"><span class="eq_value">' + val.seats + '</span></li>\
 								<li class="glyphicon "><span class="eq_value"><i class="kmicon"></i>' + val.per_km + 'Rs./km</span></li>\
+                                                                <li class="glyphicon "><span class="eq_value"><i class="glyphicon glyphicon-time"></i>8hrs./80km</span></li>\
 							 </ul>\
 							 <a href="#" data-toggle="modal" data-target="#detailModal">Details</a>\
 						  </div>\

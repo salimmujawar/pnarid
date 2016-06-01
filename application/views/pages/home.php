@@ -373,10 +373,13 @@ if(is_object($user) && empty($user->first_name)) {
 								value="<?php echo $val['ride_id']; ?>"> <input
 								id="vr_id_<?php echo $val['vr_id']; ?>" type="hidden"
 								value="<?php echo $val['vr_id']; ?>">
-							<div class="car_properties" id="car_properties_17">
-								<div class="glyphicon glyphicon-user"><span class="eq_value"><?php echo $val['seats']; ?></span></div>								
-								<div class="glyphicon"><span class="eq_value"><i class="kmicon"></i><?php echo $val['per_km']; ?>Rs./km</span></div>
-							</div>
+							<ul class="car_properties" id="car_properties_17">
+								<li class="glyphicon glyphicon-user"><span class="eq_value"><?php echo $val['seats']; ?></span></li>								
+								&nbsp;<li class="glyphicon"><span class="eq_value"><i class="kmicon"></i><?php echo $val['per_km']; ?>Rs./km</span></li>
+                                                                <?php if(isset($ride_sess['type']) && $ride_sess['type'] == 'local') { ?>
+                                                                &nbsp;<li class="glyphicon"><span class="eq_value"><i class="glyphicon glyphicon-time"></i>8hrs./80km</span></li>
+                                                                <?php } ?>
+							</ul>
 							<!-- Button trigger modal -->
 							<a href="#" data-toggle="modal" data-target="#detailModal">
 							  Details
