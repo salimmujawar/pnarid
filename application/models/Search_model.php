@@ -8,7 +8,8 @@ class Search_model extends CI_Model {
 	
 	function getRides($params = array()) {
 		$jsonData = array();
-		$this->load->model('vendor_ride_model');
+		//$this->load->model('vendor_ride_model');
+                $this->load->model('product_model');
 		$this->load->model('distance_model');
 			
 		$distance = LOCAL_DEFAULT_KM;
@@ -22,19 +23,22 @@ class Search_model extends CI_Model {
 				//print_r($pickupLatLong);				
 				//$distance 	   = round(distance($pickupLatLong->city_lat, $pickupLatLong->city_long, $dropLatLong->city_lat, $dropLatLong->city_long, "K"), 2);
 				//Google API to cache distance
-				$distance = $this->distance_model->getDrivingDistance($pickupLatLong, $dropLatLong);
+				//$distance = $this->distance_model->getDrivingDistance($pickupLatLong, $dropLatLong);
 				//as its always a round trip so multiply by 2
-				$distance = $distance * 2;
-				//$distance = OUTSTATION_DEFAULT_KM;
+				//$distance = $distance * 2;
+				$distance = OUTSTATION_DEFAULT_KM;
 			}
 		}
-		$rides = $this->vendor_ride_model->getAllVendorRides(array('pickup' => $params['pickup']));
+		//$rides = $this->vendor_ride_model->getAllVendorRides(array('pickup' => $params['pickup']));
+                $rides = $this->product_model->getAllProducts("", array('journey' => $params['type']));
+                //print_r($rides);
 		if(!empty($rides['num_rows'])) {
 			//set  the session
 		
 			if($params['step'] == 1) {
 				$rideData = array( 'ride' => array(
 								'type'  => $params['type'],
+                                                                'trip' =>  $params['trip'],
 								'pickup'=> $params['pickup'],
 								'drop' => $params['drop'],
 								'date' => $params['date'],
@@ -49,7 +53,7 @@ class Search_model extends CI_Model {
 			$percent  = ADVANCE_PAY_PERC;
 			foreach ($rides['rows'] as $key => $val) {
                                 if ($params['type'] == 'local') {
-                                    $full_pay = $val->local_rent;
+                                    $full_pay = $val->amount;
                                 }else {
                                     $full_pay = round($distance * $val->per_km);
                                 }
@@ -57,7 +61,7 @@ class Search_model extends CI_Model {
 				/*$jsonData[] = array('ride_name' => $val->ride_name, 'ride_id' => $val->ride_id, 'vr_id' => $val->vr_id
 						, 'per_km' => $val->per_km, 'seats' => $val->seats, 'full' => $full_pay, 'advance' => $adv_pay);
 				*/
-				$jsonData[] = array('ride_name' => $val->ride_name, 'ride_id' => $val->ride_id, 'vr_id' => $val->vr_id
+				$jsonData[] = array('ride_name' => $val->name, 'ride_id' => $val->p_id, 'vr_id' => $val->p_id, 'desc' => $val->description
 						, 'seats' => $val->seats, 'full' => $full_pay, 'advance' => $adv_pay, 'distance' => $distance,
 							'url' => $val->url, 'per_km' => $val->per_km);
 			}

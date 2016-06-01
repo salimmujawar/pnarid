@@ -48,12 +48,14 @@ class Booking extends CI_Controller {
 			$vr_id    = $this->input->post('vr');
 			$days     = $this->input->post('days');
 			$pay      = $this->input->post('pay');
+                        
 			$ride_sess = $ride_sess + array('pay' => $pay, 'vr_id' => $vr_id, 'ride_id' => $ride_id, 'days' => $days);
 			$valid_ride = $this->booking_model->validate_booking($ride_sess);
 			//print_r($valid_ride);	
 			if($valid_ride['valid']) {
 				$rideData = array( 'ride' => array(
 						'type'  => $ride_sess['type'],
+                                                'trip'  => $ride_sess['trip'],
 						'pickup'=> $ride_sess['pickup'],
 						'drop' => $ride_sess['drop'],
 						'date' => $ride_sess['date'],
@@ -122,6 +124,7 @@ class Booking extends CI_Controller {
 				$advance = $this->input->post('advance');
 				$basic   = $this->input->post('basic');
 				$bal     = $this->input->post('bal');
+                                $pickup  = $this->input->post('pickup');
 				$user    = $this->ion_auth->user()->row();
 				
 				$ride_sess = $this->session->userdata('ride');
@@ -131,7 +134,8 @@ class Booking extends CI_Controller {
 				
 				if($valid_ride['valid']) { //&& $total == $valid_ride['total']) {
 					$bookData = array();					
-					$bookData = $ride_sess + $valid_ride + array('user_id' => $user->id);
+					$bookData = $ride_sess + $valid_ride + array('user_id' => $user->id, 'pickup_addr' => $pickup);
+                                        //print_r($bookData);die;
 					$result = FALSE;
 					$this->db->trans_start();
 					$bookingId = $this->booking_model->addBooking($bookData);
@@ -175,6 +179,27 @@ class Booking extends CI_Controller {
 	}
         
         function failure() {
+            $this->config->load('payu');                
+            $SALT = $this->config->item('salt');
+            
+            $status=$_POST["status"];
+            $firstname=$_POST["firstname"];
+            $amount=$_POST["amount"];
+            $txnid=$_POST["txnid"];
+
+            $posted_hash=$_POST["hash"];
+            $key=$_POST["key"];
+            $productinfo=$_POST["productinfo"];
+            $email=$_POST["email"];
+            
+            
+            $retHashSeq = $SALT.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;
+            $hash = hash("sha512", $retHashSeq);
+            
+            $this->load->model('booking_model');
+            $book_ids = explode('-', $txnid);
+            $this->booking_model->updateOrder($book_ids[1], array('payment_status' => $status));
+            
             $page = 'failure';
             $data = array();
             $this->load->view('templates/header', $data);
@@ -211,21 +236,38 @@ class Booking extends CI_Controller {
 	function thankyou() {
 		$ride_sess = $this->session->userdata('ride');		
 		$page  = 'thankyou';
-		
+		//print_r($_POST);                
+                
 		if (! file_exists(APPPATH.'/views/pages/'.$page.'.php'))
 		{
 				// Whoops, we don't have a page for that!
 				show_404();
 		}
+                $this->config->load('payu');                
+                $SALT = $this->config->item('salt');
+                
+                $status=$_POST["status"];
+                $firstname=$_POST["firstname"];
+                $amount=$_POST["amount"];
+                $txnid=$_POST["txnid"];
+                $posted_hash=$_POST["hash"];
+                $key=$_POST["key"];
+                $productinfo=$_POST["productinfo"];
+                $email=$_POST["email"];
+                $retHashSeq = $SALT.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;         
+		$hash = hash("sha512", $retHashSeq);
+                $this->load->model('booking_model');
+                $book_ids = explode('-', $txnid);
+                $this->booking_model->updateOrder($book_ids[1], array('payment_status' => $status));
+                
 		if(empty($ride_sess['order_id'])) {
 			redirect('/', 'refresh');
 		}
-		$this->session->unset_userdata('ride');
-		$this->load->model('booking_model');
+		
 		$bookData = $this->booking_model->getBookingDetails($ride_sess['order_id']);
 		$data['book_data'] = $bookData;
 		$user = $this->ion_auth->user()->row();	
-                //print_r($bookData);
+                                
                 $this->load->model('sendemails_model');
                 $this->load->model('sendsms_model');
                 $email_data = array('username' => $user->first_name, 'order_id' => $bookData->order_id, 'order_date' => date('d-n-Y h:i a', strtotime($bookData->cdate)),
@@ -236,11 +278,14 @@ class Booking extends CI_Controller {
                                 'basic_fare' => $bookData->basic, 'advance_fare' => $bookData->basic,
                                 'balance_fare' => $bookData->due,	'total_fare' => $bookData->total
                 );
+                
+                //user notify email
                 $this->sendemails_model->htmlmail($user->email, 'Your Order place with Pin A Ride', 'order', $email_data);
+                //admin notify
                 $this->sendemails_model->htmlmail(NOTIFY_EMAIL, 'Order place with Pin A Ride', 'order', $email_data);
                 $sms_data = array('order_id' => $bookData->order_id);
                 $this->sendsms_model->sendmsg($user->phone, 'order_thanks', $sms_data);
-                
+                $this->session->unset_userdata('ride');	
 		$data['user'] = $user;
 		$data['js_files'] = array('thankyou');
 		$data['title'] = ucfirst($page); // Capitalize the first letter

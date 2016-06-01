@@ -4,7 +4,7 @@
 <div class="static-page">
 	<p>
 		For Help regarding booking your Rides feel free to Contact Us on:
-		<strong>+91-96993-0594.</strong> <br/>
+		<strong><?php echo CALL_US; ?>.</strong> <br/>
 		You can also drop an e-mail at <strong>support@pinaride.com</strong>.				
 	</p>
 	<p>

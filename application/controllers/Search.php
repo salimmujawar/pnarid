@@ -58,6 +58,11 @@ class Search extends CI_Controller {
 						'field' => 'pickup',
 						'label' => 'Pickup Location',
 						'rules' => 'trim|required'
+				),
+				array(
+						'field' => 'trip',
+						'label' => 'Trip type',
+						'rules' => 'trim|required'
 				),				
 				array(
 						'field' => 'date',
@@ -98,7 +103,9 @@ class Search extends CI_Controller {
 							'drop' => $this->input->post('drop'),
 							'date' => $this->input->post('date'),
 							'time' => $this->input->post('time'),
+                                                        'trip' => $this->input->post('trip'),
 							'step' => $this->input->post('step'));
+                        
 			$rideData = $this->search_model->getRides($params);
 
 			if(sizeof($rideData) > 0) {

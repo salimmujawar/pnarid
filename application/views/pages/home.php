@@ -48,13 +48,13 @@ if(is_object($user) && empty($user->first_name)) {
 					<label for="journeyType" class="col-sm-2 control-label">Journey
 						Type:</label>
 					<div class="col-sm-10">	
-            <?php
-            $checkedType = '';            
-            if (isset($ride_sess['type'])) {
-            	$checkedType = $ride_sess['type'];
-            } 
-            ?>						  
-               <label class="radio-inline"> <input id="journeyType" type="radio"
+                                                <?php
+                                                $checkedType = '';            
+                                                if (isset($ride_sess['type'])) {
+                                                    $checkedType = $ride_sess['type'];
+                                                } 
+                                                ?>						  
+                                                 <label class="radio-inline"> <input id="journeyType" type="radio"
 							name="journeyType"
 							<?php echo ($checkedType == 'outstation')?'checked':'';?>
 							class="journeyType" value="outstation" checked />Outstation
@@ -68,6 +68,28 @@ if(is_object($user) && empty($user->first_name)) {
 							<?php //echo ($checkedType == 'airport')?'checked':'';?>
 							class="journeyType" value="airport" />Airport
 						</label> <span id="journeyTypeSpan" class="help-block"></span-->
+					</div>
+				</div>
+                            <div id="journeyRouteBlock" class="form-group">
+					<label for="journeyRoute" class="col-sm-2 control-label">Trip: </label>
+					<div class="col-sm-10">
+                                                <?php
+                                                $checkedRoute = '';            
+                                                if (isset($ride_sess['trip'])) {
+                                                    $checkedRoute = $ride_sess['trip'];
+                                                } 
+                                                ?>						  
+                                                <label class="radio-inline"> <input type="radio"
+							name="journeyRoute"
+							<?php echo ($checkedRoute == 'round')?'checked':'';?>
+							class="journeyType" value="round" checked/>Round
+						</label> 
+                                                <label class="radio-inline"> <input id="journeyRoute" type="radio"
+							name="journeyRoute"
+							<?php echo ($checkedRoute == 'one-way')?'checked':'';?>
+							class="journeyType" value="one-way"  />One Way
+						</label>                                                 
+						<span id="journeyRouteSpan" class="help-block"></span>
 					</div>
 				</div>
 				<div id="journeyPickupBlock" class="form-group">
@@ -345,7 +367,7 @@ if(is_object($user) && empty($user->first_name)) {
 								width="100" alt="">
 						</div>
 						<div class="details clearfix">
-							<h2 class="car_name"><?php echo $val['ride_name']; ?></h2>
+                                                    <h2 class="car_name"><?php echo $val['ride_name']; ?></h2> <span>(<?php echo $val['desc']; ?>) </span>
 							<span class="avail no text-danger hidden">Not Available</span> <input
 								id="ride_id_<?php echo $val['vr_id']; ?>" type="hidden"
 								value="<?php echo $val['ride_id']; ?>"> <input
@@ -618,8 +640,8 @@ if(is_object($user) && empty($user->first_name)) {
 						</div>
 					</div>
 
-					<div id="bookLandmarkBlock" class="form-group">
-						<label for="bookLandmark" class="col-sm-2 control-label">Address:</label>
+					<!--div id="bookLandmarkBlock" class="form-group">
+						<label for="bookLandmark" class="col-sm-2 control-label">Pickup:</label>
 						<div class="col-sm-offset-2 ">
 							<div class="input-group">
 								<span class="input-group-addon"> <span
@@ -631,7 +653,7 @@ if(is_object($user) && empty($user->first_name)) {
 							</div>
 							<span id="bookLandmarkSpan" class="help-block"></span>
 						</div>
-					</div>
+					</div-->
 					<div class="col-sm-offset-2">
 						<button type="button" id="bookSignup" class="btn btn-danger">Submit</button>
 					</div>
@@ -724,7 +746,14 @@ if(is_object($user) && empty($user->first_name)) {
 						style="color: #a94442;"></span>
 				</form>
 				<?php } ?>
-			<?php } ?>			
+                                <div id="pickupAddrBlock" class="form-group">
+                                    <label for="pickupAddr">Pickup: </label> <input type="text"
+                                            class="form-control" data-validate="required" name="pickupAddr"
+                                            id="pickupAddr" placeholder="Pickup location" />
+                                    <span id="pickupAddrSpan" class="help-block"></span>
+                                </div>
+			<?php } ?>	
+                        
 			<input id="payBasic" type="hidden" name="payBasic" value="<?php echo (!empty($valid_ride['basic']))?$valid_ride['basic']:'';?>" /> <input
 					id="payAdvance" type="hidden" name="payAdvance"
 					value="<?php echo (!empty($valid_ride['advance']))?$valid_ride['advance']:'';?>" />

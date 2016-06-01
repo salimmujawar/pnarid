@@ -108,6 +108,7 @@ $(document).ready(function() {
 			var $jPickup = $.trim($('#journeyPickup :selected').text());
 			var $jDrop   = $.trim($('#journeyDrop :selected').text());
 			var $jType   = $.trim($("input[type='radio'][name='journeyType']:checked").val());
+                        //var $jTrip   = $.trim($("input[type='radio'][name='journeyTrip']:checked").val());
 			
 			$jPickup = ($jPickup != 'Location') ? $jPickup : '';
 			$jDrop   = ($jDrop != 'Location') ? $jDrop : '';
@@ -300,11 +301,19 @@ $(document).ready(function() {
 			 var $payBasic   = $('#payBasic');
 			 var $payAdvance = $('#payAdvance');
 			 var $payBalance = $('#payBal');
+                         var $payPickup = $('#pickupAddr');
+                         if($payPickup.val() == '') {
+                            $('#pickupAddrBlock').addClass('has-error');
+                            $('#pickupAddrSpan').show();
+                            $('#pickupAddrSpan').html('Please fill the pickup address');
+                             return false;
+                         }
+                         
                          myApp.showPleaseWait();
 			 $.ajax({
 				 url: siteUrl + "booking/paynow",
 				 type: "POST",
-				 data: {total: $payTotal.val(), advance: $payAdvance.val(), basic: $payBasic.val(), bal: $payBalance.val()},
+				 data: {total: $payTotal.val(), pickup: $payPickup.val(), advance: $payAdvance.val(), basic: $payBasic.val(), bal: $payBalance.val()},
 				 success: function (data) {
 					 data = $.parseJSON(data);					 
 					 //if there is an error
@@ -372,6 +381,7 @@ function select_ride() {
 
 function search_rides($step) {
 	var $jType   = $('input[name=journeyType]:checked', '#journeyStep1Form');
+        var $jTrip   = $('input[name=journeyRoute]:checked', '#journeyStep1Form');
 	var $jPickup = $('#journeyPickup');
 	var $jDrop   = $('#journeyDrop');
 	var $jDate   = $('#journeyDate');
@@ -391,7 +401,7 @@ function search_rides($step) {
 		 url: siteUrl + "search/rides",
 		 type: "POST",
 		 contentType: "application/x-www-form-urlencoded",				 
-		 data: {type: $jType.val(), pickup: $jPickup.val(), drop: $dropVal, date: $jDate.val(),day: $jDay.val(), time: $jTime.val(), step: $step},
+		 data: {type: $jType.val(), trip: $jTrip.val(), pickup: $jPickup.val(), drop: $dropVal, date: $jDate.val(),day: $jDay.val(), time: $jTime.val(), step: $step},
 		 success: function (data) {
 			 data = $.parseJSON(data);
 			 myApp.hidePleaseWait();
@@ -458,7 +468,7 @@ function search_rides($step) {
 							 <img class="car_image img-polaroid" src="'+siteUrl + car_img_url +'" width="100" alt="">\
 						  </div>\
 						  <div class="details clearfix">\
-							 <h2 class="car_name">' + val.ride_name + '</h2>\
+							 <h2 class="car_name">' + val.ride_name + '</h2> <span>(' + val.desc + ')</span>\
 							 <span class="avail no text-danger hidden">Not Available</span>\
 							 <input id="ride_id_'+ val.vr_id +'" type="hidden" value="'+ val.ride_id +'">\
 							 <input id="vr_id_'+ val.vr_id +'" type="hidden" value="'+ val.vr_id +'">\

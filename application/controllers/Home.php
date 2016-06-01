@@ -57,15 +57,17 @@ class Home extends CI_Controller {
 		
 		$rideData = array();
 		$valid_ride = array();
+                
 		if(!empty($ride_sess['step'])) {						
 			$this->load->model('search_model');
 			$params = array('type'  => $ride_sess['type'],
-							'pickup'=> $ride_sess['pickup'],
-							'drop' => $ride_sess['drop'],
-							'date' => $ride_sess['date'],
-							'time' => $ride_sess['time'],
-							'step' => $ride_sess['step']
-						);
+                                        'trip'=> $ride_sess['trip'],
+                                        'pickup'=> $ride_sess['pickup'],
+                                        'drop' => $ride_sess['drop'],
+                                        'date' => $ride_sess['date'],
+                                        'time' => $ride_sess['time'],
+                                        'step' => $ride_sess['step']
+                                    );
 			$rideData = $this->search_model->getRides($params);
 			//print_r($rideData);
 			if(!empty($ride_sess['vr_id'])) {

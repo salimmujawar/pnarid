@@ -1,1 +1,1 @@
-Thank you for booking a ride with us. Your booking id <?php echo $order_id; ?>. Log in at Pin A Ride for more details.
+Thanks for booking with us. Your booking id <?php echo $order_id; ?>. You will be receiving ride details on the day of journey. Log in @ Pin A Ride for more details.

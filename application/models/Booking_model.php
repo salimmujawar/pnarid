@@ -15,7 +15,8 @@ class Booking_model extends CI_Model {
 		if (!empty($params['type'])) {
 			$this->load->model('city_model');
 			$this->load->model('ride_model');
-			$this->load->model('vendor_ride_model');
+			//$this->load->model('vendor_ride_model');
+                        $this->load->model('product_model');
 			$this->load->model('distance_model');
 				
 			if(empty($params['pickup']) || empty($params['drop']) || empty($params['ride_id'])) {
@@ -23,27 +24,28 @@ class Booking_model extends CI_Model {
 			}
 			$pickupLatLong = $this->city_model->getCity('', array('city_id' => $params['pickup']));
 			$dropLatLong   = $this->city_model->getCity('', array('city_id' => $params['drop']));
-			$ride_details = $this->ride_model->getRide('', array('ride_id' =>$params['ride_id']));
+			//$ride_details = $this->ride_model->getRide('', array('ride_id' =>$params['ride_id']));
 			
 			$pickupLatLong = $pickupLatLong['rows'];
 			$dropLatLong   = $dropLatLong['rows'];
-			$ride_details = $ride_details['rows'];
+			//$ride_details = $ride_details['rows'];
 			
 			if(empty($params['vr_id'])) {
 				return $data;
 			}
-			$vendor_ride  = $this->vendor_ride_model->getVendorRide('', array('vr_id' => $params['vr_id']));
+			//$vendor_ride  = $this->vendor_ride_model->getVendorRide('', array('vr_id' => $params['vr_id']));
+                        $vendor_ride  = $this->product_model->getProduct('', array('p_id' => $params['ride_id']));
 			$vendor_ride  = $vendor_ride['rows'];
                         
 			if(!empty($pickupLatLong->city_lat) && !empty($dropLatLong->city_lat) && $params['type'] != 'local') {				
 				//print_r($pickupLatLong);
 				//$distance 	   = round(distance($pickupLatLong->city_lat, $pickupLatLong->city_long, $dropLatLong->city_lat, $dropLatLong->city_long, "K"), 2);
 				//Google API to cache distance
-				$distance = $this->distance_model->getDrivingDistance($pickupLatLong, $dropLatLong);
+				//$distance = $this->distance_model->getDrivingDistance($pickupLatLong, $dropLatLong);
 				//as its always a round trip so multiply by 2
-				$distance = $distance * 2;
+				//$distance = $distance * 2;
 				//For outstation, per day 300km on an average
-				//$distance = OUTSTATION_DEFAULT_KM;
+				$distance = OUTSTATION_DEFAULT_KM;
 				
 			}elseif($params['type'] == 'local'){
 				$distance = LOCAL_DEFAULT_KM;
@@ -62,7 +64,7 @@ class Booking_model extends CI_Model {
 				
 				
                                 if ($params['type'] == 'local') {
-                                    $full_pay = $vendor_ride->local_rent;
+                                    $full_pay = $vendor_ride->amount;
                                 }else {
                                     $full_pay = round(($distance * $vendor_ride->per_km) * $days, 2);
                                 }
@@ -98,7 +100,7 @@ class Booking_model extends CI_Model {
 				return $data;
 			}
 			$data['distance'] = $distance;
-			$data['ride_name'] = $ride_details->ride_name;
+			$data['ride_name'] = $vendor_ride->name . ' (' . $vendor_ride->description . ')';
 			$data['pickup']   = $pickupLatLong->city_name;
 			$data['drop']     = $dropLatLong->city_name;
 			$data['total']	  = $total;
@@ -154,7 +156,7 @@ class Booking_model extends CI_Model {
 		$this->db->join('users u', 'u.id = b.user_id', 'left');
 		
 		if($where == "all") {
-			$this->db->join('users v', 'v.id = b.vendor_id');
+			$this->db->join('users v', 'v.id = b.vendor_id', 'left');
 		}
 		
 		if(is_array($where) && sizeof($where) > 0) {
@@ -191,12 +193,14 @@ class Booking_model extends CI_Model {
 	
 	function getBookingDetails($orderId, $bookId = 0 ) {
 		$data = array();
+                
 		if(!empty($orderId) || !empty($bookId)) {
-			$this->db->select('b.*, f.city_name as from_city, t.city_name as to_city, u.email, u.phone, u.first_name');
+			$this->db->select('b.*, f.city_name as from_city, t.city_name as to_city, u.email, u.phone, u.first_name, v.first_name as vendor_name, v.phone as vendor_contact');
 			$this->db->from('booking b');
 			$this->db->join('master_city f', 'f.city_id = b.ride_from');
 			$this->db->join('master_city t', 't.city_id = b.ride_to');
 			$this->db->join('users u', 'u.id = b.user_id');
+                        $this->db->join('users v', 'v.id = b.vendor_id', 'left');
 			if(!empty($orderId)) {
                             $this->db->where('b.order_id', $orderId);			
                         }elseif(!empty($bookId)) {
@@ -228,17 +232,17 @@ class Booking_model extends CI_Model {
 			$time = explode(' ', $params['time']);
 			$time = explode(':', $time['0']);
 			//print_r($time);					
-			$fields = array('vendor_id' => $params['vr_id'], 'user_id' => $params['user_id'], 
-							 'coupon' => $code,'rent_type' => $params['type'], 
-							 'pay_type' => $params['pay'],'ride_id' => $params['ride_id'],
-							 'ride_from' => $params['pickup'],'ride_to' => $params['drop'],
-							 'paid' => $params['advance'],'due' => $params['balance'], 'total' => $params['total'], 
-							 'payment_status' => 'Pending','sms_notified' => 0, 'basic' => $params['basic'],
-							 'email_notified' => 0,'status' => 1, 'rides' => 1, 'days' => $params['days'],
-							 'pickup_datetime' => date('Y-m-d', strtotime($params['date'])) .' '. $time[0].':'.$time[1].':00',
-							 'cdate' => date('Y-m-d H:i:s'), 'distance' => $params['distance'],
-							 'ride_name' => $params['ride_name'], 'tax' => $params['tax']
-						);
+			$fields = array('vendor_id' => 0, 'user_id' => $params['user_id'], 
+                                        'coupon' => $code,'rent_type' => $params['type'], 'trip_type' => $params['trip'],
+                                        'pay_type' => $params['pay'],'ride_id' => $params['ride_id'],
+                                        'ride_from' => $params['pickup'],'pickup' => $params['pickup_addr'],'ride_to' => $params['drop'],
+                                        'paid' => $params['advance'],'due' => $params['balance'], 'total' => $params['total'], 
+                                        'payment_status' => 'Pending','sms_notified' => 0, 'basic' => $params['basic'],
+                                        'email_notified' => 0,'status' => 1, 'rides' => 1, 'days' => $params['days'],
+                                        'pickup_datetime' => date('Y-m-d', strtotime($params['date'])) .' '. $time[0].':'.$time[1].':00',
+                                        'cdate' => date('Y-m-d H:i:s'), 'distance' => $params['distance'],
+                                        'ride_name' => $params['ride_name'], 'tax' => $params['tax']
+                               );
 			//print_r($fields);die;
 			$this->db->set($fields);
 			$this->db->insert('booking');

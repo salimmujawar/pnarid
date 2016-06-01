@@ -62,6 +62,8 @@ define('PER_PAGE', '5');
 define('DEFAULT_SEO_TITLE', ' Car on rental');
 define('CACHE_VERSION', '1.1');
 define('NOTIFY_EMAIL', 'pinaride@gmail.com');
+define('VENDOR_ID', 3);
+define('ADMIN_ID', 1);
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

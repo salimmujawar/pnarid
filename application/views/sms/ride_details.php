@@ -1,0 +1,1 @@
+Hello <?php echo $firstname; ?>, Booking id: <?php echo $order_id; ?>. Vehicle: <?php echo $ride_name; ?>. Driver Contact: <?php echo $vendor_contact; ?>. Ride Number: <?php echo $ride_num; ?>.

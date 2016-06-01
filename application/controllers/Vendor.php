@@ -80,7 +80,7 @@ class Vendor extends CI_Controller {
 			$result = false;
 			$this->db->trans_start();
 			try{
-				$userId = $this->ion_auth->register($identity, $password, $email, $additional_data, array(3));
+				$userId = $this->ion_auth->register($identity, $password, $email, $additional_data, array(VENDOR_ID));
 				if($userId) {
 					$vendor_data = array('vendor_id' => $userId, 'address' => $this->input->post('address'), 'city_id' => $this->input->post('city'));
 					$this->load->model('vendor_model');
