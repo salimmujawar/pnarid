@@ -292,6 +292,10 @@ class Ion_auth
 		$this->ion_auth_model->trigger_events('pre_account_creation');
 
 		$email_activation = $this->config->item('email_activation', 'ion_auth');
+                
+                //Salim: modified to add unique-id for mobile
+                $uuid = uniqid('', true);
+                $additional_data = $additional_data + array('unique_id' => $uuid);
 
 		$id = $this->ion_auth_model->register($identity, $password, $email, $additional_data, $group_ids);
 
@@ -449,6 +453,11 @@ class Ion_auth
 		}
 		return null;
 	}
+        
+        function check_email_exist($email) 
+        {
+            return $this->ion_auth_model->email_check($email);
+        }
 
 
 	/**
