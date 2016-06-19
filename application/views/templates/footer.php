@@ -229,5 +229,49 @@
 					}
     			} ?>
     <?php } ?>
+<?php 
+$user = isLogin();
+$grp_id = 0;
+if(is_object($user) && !empty($user->id)) {
+        $grp_id = getGroup($user->id);
+}
+if($grp_id != 1 && ENVIRONMENT != 'development') { ?>
+<!--script type='text/javascript'>
+    window._sbzq||function(e){e._sbzq=[];var t=e._sbzq;t.push(["_setAccount",43723]);var n=e.location.protocol=="https:"?"https:":"http:";var r=document.createElement("script");r.type="text/javascript";r.async=true;r.src=n+"//static.subiz.com/public/js/loader.js";var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)}(window);
+</script-->
+<!-- Google Code for Search Form Clicked Conversion Page
+In your html page, add the snippet and call
+goog_report_conversion when someone clicks on the
+chosen link or button. -->
+<script type="text/javascript">
+  /* <![CDATA[ */
+  goog_snippet_vars = function() {
+    var w = window;
+    w.google_conversion_id = 882338006;
+    w.google_conversion_label = "4vV4CP3G1mcQ1tHdpAM";
+    w.google_remarketing_only = false;
+  }
+  // DO NOT CHANGE THE CODE BELOW.
+  goog_report_conversion = function(url) {
+    goog_snippet_vars();
+    window.google_conversion_format = "3";
+    var opt = new Object();
+    opt.onload_callback = function() {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  }
+  var conv_handler = window['google_trackConversion'];
+  if (typeof(conv_handler) == 'function') {
+    conv_handler(opt);
+  }
+}
+/* ]]> */
+</script>
+<script type="text/javascript"
+  src="//www.googleadservices.com/pagead/conversion_async.js">
+</script>
+
+<?php } ?>
 </body>
 </html>

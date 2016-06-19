@@ -122,10 +122,11 @@ $(document).ready(function() {
 				$seoTitle = 'Car on rent from ' + $jPickup + ' to ' + $jDrop;
 				$seoUrl   = siteUrl + $jType + '/car-search/' + $jPickup + '-to-' + $jDrop;
 			}
-			
+			$seoUrl = $seoUrl.toLowerCase().replace(' ', '-');
 			myApp.showPleaseWait();
 			search_rides(1);
-			ChangeUrl($seoTitle, $seoUrl.toLowerCase().replace(' ', '-'));
+                        goog_report_conversion ($seoUrl + '#date');
+			ChangeUrl($seoTitle, $seoUrl);
 			$('#page-h1').html($seoTitle + ': ');
 			location.hash = '#date';			
 		}
@@ -462,6 +463,10 @@ function search_rides($step) {
 					 }else{
 						 car_img_url += 'car-default-200x150.png';
 					 }
+                                         var local_dur = '';
+                                         if($jType.val() == 'local') {
+                                             local_dur = '<li class="glyphicon "><span class="eq_value"><i class="glyphicon glyphicon-time"></i>8hrs./80km</span></li>';
+                                         }
 					 rides_li += '<li class="clearfix" id="li_car_17">\
 					   <div class="data_wrapper">\
 						  <div class="picture left">\
@@ -474,9 +479,8 @@ function search_rides($step) {
 							 <input id="vr_id_'+ val.vr_id +'" type="hidden" value="'+ val.vr_id +'">\
 							 <ul class="car_properties" id="car_properties_17">\
 								<li class="glyphicon glyphicon-user"><span class="eq_value">' + val.seats + '</span></li>\
-								<li class="glyphicon "><span class="eq_value"><i class="kmicon"></i>' + val.per_km + 'Rs./km</span></li>\
-                                                                <li class="glyphicon "><span class="eq_value"><i class="glyphicon glyphicon-time"></i>8hrs./80km</span></li>\
-							 </ul>\
+								<li class="glyphicon "><span class="eq_value"><i class="kmicon"></i>' + val.per_km + 'Rs./km</span></li>'+ local_dur +'\
+                                                         </ul>\
 							 <a href="#" data-toggle="modal" data-target="#detailModal">Details</a>\
 						  </div>\
 					   </div>\
