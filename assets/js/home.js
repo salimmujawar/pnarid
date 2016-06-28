@@ -143,8 +143,10 @@ $(document).ready(function() {
 		}else{
 			var $chekoutPage = siteUrl + 'checkout';
 			var $seoTitle = 'Pinaride - Checkout';
+                        var $checkoutUrl = $chekoutPage.toLowerCase().replace(' ', '-');
 			you_pay(key);
-			ChangeUrl($seoTitle, $chekoutPage.toLowerCase().replace(' ', '-'));
+                        book_goog_report_conversion($checkoutUrl);
+			ChangeUrl($seoTitle, $checkoutUrl);
 			location.hash = '#vehicle';
 		}
 	});

@@ -257,15 +257,38 @@ chosen link or button. -->
     window.google_conversion_format = "3";
     var opt = new Object();
     opt.onload_callback = function() {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+    }
+    var conv_handler = window['google_trackConversion'];
+    if (typeof(conv_handler) == 'function') {
+        conv_handler(opt);
     }
   }
-  var conv_handler = window['google_trackConversion'];
-  if (typeof(conv_handler) == 'function') {
-    conv_handler(opt);
-  }
-}
+  
+    book_goog_snippet_vars = function() {
+        var w = window;
+        w.google_conversion_id = 882338006;
+        w.google_conversion_label = "PMlxCJrj5mcQ1tHdpAM";
+        w.google_remarketing_only = false;
+    }
+  // DO NOT CHANGE THE CODE BELOW.
+  book_goog_report_conversion = function(url) {
+    book_goog_snippet_vars();
+    window.google_conversion_format = "3";
+    var opt = new Object();
+    opt.onload_callback = function() {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+    }
+    var conv_handler = window['google_trackConversion'];
+    if (typeof(conv_handler) == 'function') {
+        conv_handler(opt);
+      }
+    }
+    
 /* ]]> */
 </script>
 <script type="text/javascript"
