@@ -43,33 +43,7 @@ if(is_object($user) && empty($user->first_name)) {
 				style="display: none;">
 				<strong>Failed!</strong> Please correct the errors.
 			</div>
-			<form id="journeyStep1Form" class="form-horizontal">
-				<div id="journeyTypeBlock" class="form-group">
-					<label for="journeyType" class="col-sm-2 control-label">Journey
-						Type:</label>
-					<div class="col-sm-10">	
-                                                <?php
-                                                $checkedType = '';            
-                                                if (isset($ride_sess['type'])) {
-                                                    $checkedType = $ride_sess['type'];
-                                                } 
-                                                ?>						  
-                                                 <label class="radio-inline"> <input id="journeyType" type="radio"
-							name="journeyType"
-							<?php echo ($checkedType == 'outstation')?'checked':'';?>
-							class="journeyType" value="outstation" checked />Outstation
-						</label> <label class="radio-inline"> <input type="radio"
-							name="journeyType"
-							<?php echo ($checkedType == 'local')?'checked':'';?>
-							class="journeyType" value="local" />Local
-						</label> 
-						<!-- label class="radio-inline"> <input type="radio"
-							name="journeyType"
-							<?php //echo ($checkedType == 'airport')?'checked':'';?>
-							class="journeyType" value="airport" />Airport
-						</label> <span id="journeyTypeSpan" class="help-block"></span-->
-					</div>
-				</div>
+                    <form id="journeyStep1Form" class="form-horizontal" method="post" action="/search/cars" onsubmit="return step1Click();">				
                             <div id="journeyRouteBlock" class="form-group">
 					<label for="journeyRoute" class="col-sm-2 control-label">Trip: </label>
 					<div class="col-sm-10">
@@ -92,32 +66,20 @@ if(is_object($user) && empty($user->first_name)) {
 						<span id="journeyRouteSpan" class="help-block"></span>
 					</div>
 				</div>
-				<div id="journeyPickupBlock" class="form-group">
-					<label for="journeyPickup" class="col-sm-2 control-label">Pickup: </label>
+				<div id="journeySaddrBlock" class="form-group">
+					<label for="journeySaddr" class="col-sm-2 control-label">Pickup: </label>
 					<div class="col-sm-10">
 						<div class='input-group'>
 							<span class="input-group-addon"> <span
 								class="glyphicon glyphicon-map-marker"></span>
-							</span> <select class="form-control" data-validate="required"
-								name="journeyPickup" id="journeyPickup">
-								<option value="">Location</option>
-					<?php				
-					$selectedPickup = '';
-					if(isset($ride_sess['pickup'])) {
-						$selectedPickup = $ride_sess['pickup'];
-					}
-					if(isset($pickup_cities) && is_array($pickup_cities)) {
-	   						foreach ($pickup_cities as $key => $val) {?>
-	   							<option
-									<?php echo (($selectedPickup == $val->city_id) || ($selectedPickup == $val->city_name)) ?'selected ':'';?>
-									value="<?php echo $val->city_id;?>"><?php echo $val->city_name;?></option>
-	   				<?php	} 
-	   					} ?>                
-	               </select>
-						<input type="hidden" name="journeyLocal" id="journeyLocal" 
-						value="<?php echo ((!empty($ride_sess['type']) && !empty($ride_sess['drop']) && $ride_sess['type'] == 'local'))?$ride_sess['drop']:'';?>" />
+							</span>                                                    
+                                                <input type="text" class="form-control"
+                                                    data-validate="required" name="journeySaddr" id="journeySaddr"
+                                                    value="" maxlength="2048" placeholder="Pickup location"/>
+                                                <input type="hidden" name="saddrLat"  value="" class="controls" id="saddrLat"/>
+                                                <input type="hidden" name="saddrLng"  value="" class="controls" id="saddrLng"/>
 						</div>
-						<span id="journeyPickupSpan" class="help-block"></span>
+						<span id="journeySaddrSpan" class="help-block"></span>
 					</div>
 				</div>
 				<?php
@@ -127,31 +89,21 @@ if(is_object($user) && empty($user->first_name)) {
 					} 
 				?>
 				<?php //if ( $showDrop ) {?>				
-					<div id="journeyDropBlock" class="form-group" style="<?php echo (!$showDrop) ? 'display:none' : '';?>">
-						<label for="journeyDrop" class="col-sm-2 control-label">Drop: </label>
+					<div id="journeyDaddrBlock" class="form-group" style="<?php echo (!$showDrop) ? 'display:none' : '';?>">
+						<label for="journeyDaddr" class="col-sm-2 control-label">Drop: </label>
 						<div class="col-sm-10">
 							<div class='input-group'>
 								<span class="input-group-addon"> <span
 									class="glyphicon glyphicon-map-marker"></span>
-								</span> <select class="form-control selectpicker" data-live-search="true" data-validate="required"
-									name="drop" id="journeyDrop">
-									<option value="">Location</option>
-							<?php
-							$selectedDrop = '';
-							if (!empty($ride_sess['drop'])) {
-								$selectedDrop = $ride_sess['drop'];
-							} 
-							if (isset($drop_cities) && is_array($drop_cities)) {
-		   							 foreach ($drop_cities as $key => $val) {?>
-		   								<option
-										<?php echo (($selectedDrop == $val->city_id) || ($selectedDrop == $val->city_name))?'selected ':'';?>
-										value="<?php echo $val->city_id;?>"><?php echo $val->city_name;?></option>
-		   					<?php	} 
-		   						} ?>  
-		               </select>
+								</span> 
+                                                    <input type="text" class="form-control"
+                                                    data-validate="required" name="journeyDaddr" id="journeyDaddr"
+                                                    value="" maxlength="2048" placeholder="Drop location"/>
+                                                    <input type="hidden" name="daddrLat"  value="" class="controls" id="daddrLat"/>
+                                                    <input type="hidden" name="daddrLng"  value="" class="controls" id="daddrLng"/>
 	
 							</div>
-							<span id="journeyDropSpan" class="help-block"></span>
+							<span id="journeyDaddrSpan" class="help-block"></span>
 						</div>
 					</div>
 				<?php //} ?>
@@ -175,39 +127,30 @@ if(is_object($user) && empty($user->first_name)) {
 						<span id="journeyDateSpan" class="help-block"></span>
 					</div>
 				</div>
-	
-				<div id="journeyTimeBlock" class="form-group">
-					<label for="journeyTime" class="col-sm-2 control-label">Time: </label>
-	
+                            <div id="journeyDateBlock" class="form-group">
+					<label for="journeyDate" class="col-sm-2 control-label">Return Date: </label>
 					<div class="col-sm-10">
-						<div class='input-group'>
+            	<?php
+		            $selectedDate = '';
+		            if (isset($ride_sess['date'])) {
+		            	$selectedDate = $ride_sess['date'];
+		            } 
+		            ?>	
+             	 <div class='input-group date' id='returndatepick'>
 							<span class="input-group-addon"> <span
-								class="glyphicon glyphicon-time"></span>
-							</span> <select class="form-control selectpicker" data-live-search="true" data-validate="required"
-								name="journeyTime" id="journeyTime">
-
-								<option value="">--:--</option>
-                  	<?php 
-	                  	$selectedTime = '';
-	                  	if(isset($ride_sess['time'])) {
-	                  		$selectedTime = $ride_sess['time'];
-	                  	}
-	                  	$selTimeStr = '';
-  						foreach($time as $key => $val){
-							$selTimeStr = ($selectedTime == $val)?'selected':'';
-							echo '<option '.$selTimeStr.' value="'.$val.'">'. $val."</option>";							
-						}
-					?>
-                  </select>
+								class="glyphicon glyphicon-calendar"></span>
+							</span> <input type='text' class="form-control"
+								data-validate="required" name="journeyReturndt" id="journeyReturndt"
+								value="<?php echo $selectedDate; ?>" />
 
 						</div>
-						<span id="journeyTimeSpan" class="help-block"></span>
+						<span id="journeyDateSpan" class="help-block"></span>
 					</div>
-				</div>
+				</div>				
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="button" id="step-1" class="btn btn-danger btn-lg">Start</button>
+						<input type="submit" id="step-1" class="btn btn-danger btn-lg" value="Find Rates"/>
 					</div>
 				</div>
 			</form>
@@ -786,3 +729,4 @@ if(is_object($user) && empty($user->first_name)) {
 		</div>
 	</div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBH1jCjCG1Jd1SAUV1j97lLXjCAkFN9h4o&libraries=places"></script>

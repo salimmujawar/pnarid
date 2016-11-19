@@ -118,6 +118,7 @@ class User extends CI_Controller {
                                 'first_name' => (!empty($name[0]))?$name[0]:'',
                                 'last_name'  => (!empty($name[1]))?$name[1]:'',            		
                                 'phone'      => $this->input->post('mobile'),
+                                'unique_id'  => $this->input->post('uid'),
                                 'address'    => (isset($_POST['address']))?$this->input->post('address'):'',
                     ); 
                     if($this->ion_auth->check_email_exist($email)) {

@@ -532,6 +532,16 @@ select.car_count { display: inline-block; width: 85px; margin-top: 1em }
 #headerWrap span{
 	font-size:13px;
 }
+
+.list_wrapper #info-box {
+    font-size: 12px;
+}
+
+.car_count .fare {
+  float: left;
+  width: 48%;
+  margin: 0px 0 0 2%;
+}
 /* RESPONSIVE for mobile
 ------------------------------------------------------------------------------------------------------------------ */
 @media only screen and (max-width: 1200px) { 

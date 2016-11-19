@@ -43,7 +43,7 @@
  */
 date_default_timezone_set("Asia/Kolkata");
 setlocale(LC_MONETARY, 'en_IN');
-
+define('COMMISSION', '0.1');
 define('RIDE_INTERVAL', '14400');
 define('RIDE_END_TIME', '23:30');
 define('RIDE_SEARCH_TIME', '+30 minutes');
@@ -60,7 +60,7 @@ define('ADMIN_CANCELLED_ORDER', 'admin_cancelled_order');
 define('DATE_FORMAT', 'd-M-Y');
 define('PER_PAGE', '5');
 define('DEFAULT_SEO_TITLE', ' Car on rental');
-define('CACHE_VERSION', '1.1');
+define('CACHE_VERSION', '1.13');
 define('NOTIFY_EMAIL', 'pinaride@gmail.com');
 define('VENDOR_ID', 3);
 define('ADMIN_ID', 1);

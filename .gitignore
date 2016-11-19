@@ -2,6 +2,7 @@
 .project
 .settings/
 backup/
+application/language/
 application/sql/
 application/config/
 application/models/Sendemails_model.php
