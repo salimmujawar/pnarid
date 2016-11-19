@@ -28,6 +28,7 @@ class Search_model extends CI_Model {
     }
     
     public function getRideDetails($route, $distance, $ride_id =0) {
+        $rideData = array();
             if ($route == 'round') {
                 $totalDistance = $distance * 2;
             }

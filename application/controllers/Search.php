@@ -46,6 +46,24 @@ class Search extends CI_Controller {
             return TRUE;
         }
     }
+    
+    function custom_package() {
+        $page = 'custom_package';
+        if (!file_exists(APPPATH . '/views/pages/' . $page . '.php')) {
+            // Whoops, we don't have a page for that!
+            show_404();
+        }
+        $data['title'] = ucfirst('Mumbai Darshan'); // Capitalize the first letter
+        $this->load->model('product_model');
+        $rides = $this->product_model->getAllProducts("", array('journey' => 'mumbai-darshan'));
+        $data['rides'] = $rides['rows'];
+        $data['current_date'] = date('m/d/Y', strtotime('+1 days'));
+        $data['js_files'] = array('package');
+        $data['css_files'] = array();
+        $this->load->view('templates/header', $data);
+        $this->load->view('pages/' . $page, $data);
+        $this->load->view('templates/footer', $data);
+    }
 
     public function cars() {
         $page = 'cars';

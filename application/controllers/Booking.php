@@ -10,24 +10,44 @@ class Booking extends CI_Controller {
         $this->load->library('session');
         $this->load->library(array('ion_auth', 'form_validation'));
     }
-
+    
+    
     public function start() {
         $page = 'startbooking';
         if (!file_exists(APPPATH . '/views/pages/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        $cust_query = $this->session->userdata('cust_query');
-        //print_r($_POST);die;
-        if ($this->input->post('ride_details')) {
-            $ride_details = json_decode(stripslashes($this->input->post('ride_details')), true);
-           
-            //echo 'cust';
-            //print_r($cust_query);
+       
+        //print_r($_POST);
+        if ($this->input->post('ride_details') || $this->input->post('custom_package')) {
+            
+            if ($this->input->post('custom_package')) {
+                $this->load->model('product_model');
+                $ride = $this->product_model->getProduct("", array('p_id' => $this->input->post('ride_id')));
+                $ride = $ride['rows'];
+                $numberDays = 1;               
+                $payment = ($ride->amount * COMMISSION);
+                $ride_details = array ( 'car_model' => $ride->description, 'category' => $ride->category . $ride->seats .' Seater AC', 'base_fare' => $ride->amount, 'advance' => $payment, 'url' => $ride->url, 'distance' => 120, 'ride_id' => $ride->p_id, 'journey' => $ride->journey );
+                $cust_query = array('journeyRoute' => 'local', 'journeySaddr' => 'Mumbai Darshan', 'journeyDaddr' => '', 'journeyDate' => $this->input->post('journeyDate'));
+                $product = $ride->p_id;
+                $this->session->set_userdata('cust_query', $cust_query);
+                //print_r($ride); die;
+            }else{
+               $cust_query = $this->session->userdata('cust_query');
+               $ride_details = json_decode(stripslashes($this->input->post('ride_details')), true);
+               $numberDays = number_days($cust_query['journeyDate'], $cust_query['journeyReturndt']);
+               $payment = $this->input->post('fare'); 
+               $product = $this->input->post('product');
+               
+            }
             $data['cust_query'] = $cust_query;
+            //echo 'cust';
+            /*print_r($ride_details);
+            print_r($cust_query); die;*/
+           
 
-            $numberDays = number_days($cust_query['journeyDate'], $cust_query['journeyReturndt']);
-            $payment = $this->input->post('fare');
+            
             $ride_details = array_merge($ride_details, array('days' => $numberDays, 'payment' => $payment));
             $data['current_date'] = date('m/d/Y', strtotime('+1 days'));
             $hour = date('h', strtotime('+2 hours'));
@@ -36,7 +56,7 @@ class Booking extends CI_Controller {
             $data['valid_time'] = "$hour:$minute $meridiem";
             $data['current_time'] = date('h:i A', strtotime('+2 hours'));
             $data['time'] = getTime();
-            $data['product'] = $this->input->post('product');
+            $data['product'] = $product;
             $data['ride_details'] = $ride_details;
             $data['title'] = ucfirst('start booking'); // Capitalize the first letter	
             $data['js_files'] = array('booking', 'bootstrap-select.min');
@@ -170,17 +190,26 @@ class Booking extends CI_Controller {
                 $pickup = $this->input->post('pickup');
                 $pickup_time = $this->input->post('pickuptime');
                 $user = $this->ion_auth->user()->row();
-                $numberDays = number_days($cust_query['journeyDate'], $cust_query['journeyReturndt']);
+                //$numberDays = number_days($cust_query['journeyDate'], $cust_query['journeyReturndt']);
                 
                 //validate query
                 $this->load->model('search_model');
-                $distance = $this->search_model->getDrivingDistance($cust_query['saddrLat'], $cust_query['daddrLat'], $cust_query['saddrLng'], $cust_query['daddrLng']);
-                $product = $this->input->post('product');
-                $ride_details = $this->search_model->getRideDetails($cust_query['journeyRoute'], $distance['distance'], $product);
+                if($cust_query['journeyRoute'] == 'local') {
+                    $this->load->model('product_model');
+                    $ride = $this->product_model->getProduct("", array('p_id' => $this->input->post('product')));
+                    $ride = $ride['rows']; 
+                    $ride_details = array ( 'car_model' => $ride->description, 'category' => $ride->category . $ride->seats .' Seater AC', 'base_fare' => $ride->amount, 'advance' => ($ride->amount * COMMISSION), 'url' => $ride->url, 'distance' => 120, 'ride_id' => $ride->p_id, 'journey' => $ride->journey );                    
+                   
+                }else{
+                    $distance = $this->search_model->getDrivingDistance($cust_query['saddrLat'], $cust_query['daddrLat'], $cust_query['saddrLng'], $cust_query['daddrLng']);
+                    $product = $this->input->post('product');
+                    $ride_details = $this->search_model->getRideDetails($cust_query['journeyRoute'], $distance['distance'], $product); 
+                }
+                
                 
                  
-                
-                //print_r($ride_details);   
+                /*print_r($cust_query);
+                print_r($ride_details);   die;*/
                 
                 //die('In paynow');
                 /*$ride_sess = $this->session->userdata('ride');
@@ -191,7 +220,12 @@ class Booking extends CI_Controller {
                 //if ($valid_ride['valid']) { //&& $total == $valid_ride['total']) {
                 if (!empty($ride_details['base_fare']) && $ride_details['base_fare'] == $basic) {
                     $bookData = array();
-                    $numberDays = number_days($cust_query['journeyDate'], $cust_query['journeyReturndt']);
+                    if (!empty($cust_query['journeyReturndt'])) {
+                       $numberDays = number_days($cust_query['journeyDate'], $cust_query['journeyReturndt']); 
+                    }else {
+                        $numberDays = 1;
+                    }
+                    
                     $bookData = array('user_id' => $user->id, 'pickup_addr' => $pickup, 'days' => $numberDays, 'type' => $ride_details['journey'],
                                      'pay' => 'advance', 'trip' => $cust_query['journeyRoute'], 'ride_id' => $ride_details['ride_id'],
                                      'pickup' => $cust_query['journeySaddr'],'pickup_addr' => $pickup,'drop' => $cust_query['journeyDaddr'],
