@@ -23,6 +23,8 @@ class Booking extends CI_Controller {
         if ($this->input->post('ride_details') || $this->input->post('custom_package')) {
             
             if ($this->input->post('custom_package')) {
+                $this->load->model('search_model');            
+                $this->search_model->addSearchLog();
                 $this->load->model('product_model');
                 $ride = $this->product_model->getProduct("", array('p_id' => $this->input->post('ride_id')));
                 $ride = $ride['rows'];

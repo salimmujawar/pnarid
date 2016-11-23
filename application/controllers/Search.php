@@ -46,18 +46,23 @@ class Search extends CI_Controller {
             return TRUE;
         }
     }
-    
+        
     function custom_package() {
         $page = 'custom_package';
         if (!file_exists(APPPATH . '/views/pages/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        $url = explode('/', $_SERVER['REQUEST_URI']);
+        if (strpos($_SERVER['REQUEST_URI'], '?')) {
+            $str = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '?'));
+        }else {
+            $str = $_SERVER['REQUEST_URI'];
+        }
         
+        $url = explode('/', $str);        
         $data['title'] = ucwords(str_replace('-', ' ', $url[2])); // Capitalize the first letter
         $this->load->model('product_model');
-        $rides = $this->product_model->getAllProducts("", array('journey' => 'mumbai-darshan'));
+        $rides = $this->product_model->getAllProducts("", array('journey' => $url[2]));
         $data['rides'] = $rides['rows'];
         $data['current_date'] = date('m/d/Y', strtotime('+1 days'));
         $data['js_files'] = array('package');

@@ -85,10 +85,10 @@ class Search_model extends CI_Model {
     }
     
     function addSearchLog() {
-        if (LOG_SEARCH == 1) {
-          $campainge = (!empty($_GET['cmp']))?$_GET['cmp']:'organic';
+        if (LOG_SEARCH == 1) {            
+            $campainge = (!empty($_GET['cmp']))?$_GET['cmp']:'organic';
             $forw_for =  (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))?$_SERVER['HTTP_X_FORWARDED_FOR']:'';
-            $data = array('post' => json_encode($_POST), 'frw_client_ip' => $forw_for, 
+            $data = array('post' => json_encode($_POST), 'referer'=> $_SERVER['HTTP_REFERER'] ,'frw_client_ip' => $forw_for, 
                 'remote_ip' => $_SERVER['REMOTE_ADDR'], 'campainge' => $campainge);
             $this->db->set($data);
             $this->db->insert('search_log');  
