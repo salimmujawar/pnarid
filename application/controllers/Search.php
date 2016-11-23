@@ -53,7 +53,9 @@ class Search extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        $data['title'] = ucfirst('Mumbai Darshan'); // Capitalize the first letter
+        $url = explode('/', $_SERVER['REQUEST_URI']);
+        
+        $data['title'] = ucwords(str_replace('-', ' ', $url[2])); // Capitalize the first letter
         $this->load->model('product_model');
         $rides = $this->product_model->getAllProducts("", array('journey' => 'mumbai-darshan'));
         $data['rides'] = $rides['rows'];
@@ -102,8 +104,16 @@ class Search extends CI_Controller {
         } else {
             $rideData = array();
             $jsonStr = "";
-            $this->load->model('search_model');
-            $distance = $this->search_model->getDrivingDistance($this->input->post('saddrLat'), $this->input->post('daddrLat'), $this->input->post('saddrLng'), $this->input->post('daddrLng'));
+            $this->load->model('search_model');            
+            $this->search_model->addSearchLog();
+            $from = strip_tags($_GET['from']);
+            $to = strip_tags($_GET['to']);
+            if (strtolower($from) == 'shirdi' || strtolower($to) == 'shirdi') {
+                $distance['distance'] = SHIRDI_DISTANCE;
+            }else {
+                $distance = $this->search_model->getDrivingDistance($this->input->post('saddrLat'), $this->input->post('daddrLat'), $this->input->post('saddrLng'), $this->input->post('daddrLng'));
+            }
+            
             //print_r($distance);
             $searchData['cust_query'] = $_POST;
             $this->session->set_userdata($searchData);
@@ -112,17 +122,18 @@ class Search extends CI_Controller {
             
             //print_r($searchData);
             $totalDistance = $distance['distance'];
-            $rideData = $this->search_model->getRideDetails($this->input->post('journeyRoute'), $totalDistance);
-            $searchQuery['from'] = strip_tags($_GET['from']);
-            $searchQuery['to'] = strip_tags($_GET['to']);
-            if ($this->input->post('journeyRoute') == 'round') {
-                $totalDistance = $distance['distance'] * 2;
-            }
+            $numberDays = number_days($this->input->post('journeyDate'), $this->input->post('journeyReturndt'));
+            $rideData = $this->search_model->getRideDetails($this->input->post('journeyRoute'), $totalDistance, 0, $numberDays);
+            $searchQuery['from'] = $from;
+            $searchQuery['to'] = $to;
+            $totalDistance = $rideData['total_distance'];
+            unset($rideData['total_distance']);
             $searchQuery['total_distance'] = $totalDistance;
             //echo $totalDistance;
             
         }
         //print_r($rideData);
+        $data['number_days'] = $numberDays;
         $data['searchQuery'] = $searchQuery;
         $data['ride_data'] = $rideData;
         $data['js_files'] = array('carlist');

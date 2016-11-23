@@ -36,7 +36,7 @@
             </div>
 
             <?php if (sizeof($ride_data) > 0) { ?>
-            <h3>From <?php echo $searchQuery['from']; ?>, to <?php echo $searchQuery['to']; ?>, total distance charged <?php echo $searchQuery['total_distance']; ?> km </h3>
+            <h3>From <?php echo $searchQuery['from']; ?>, to <?php echo $searchQuery['to']; ?>, <?php echo (!empty($number_days))?' for '. $number_days . ' days':'';?> total distance charged <?php echo $searchQuery['total_distance']; ?> km </h3>
                 <div id="info-box" class="alert alert-info" role="alert">                
                     <strong>*Note: </strong>Driver allowance 250/- not included.<br/>Extra km, Toll Tax, State Tax, Parking & Airport Entry not included.
 
@@ -49,7 +49,8 @@
                     </tr> 
                 </thead> 
                 <tbody> 
-                    <?php foreach ($ride_data as $key => $val) { ?>
+                    <?php foreach ($ride_data as $key => $val) { 
+                        if(!empty($val['ride_id'])) {?>
                     <tr> 
                         <th scope="row"><div class="picture left">
                                     <?php
@@ -77,13 +78,14 @@
                             <input type="hidden" id="product_<?php echo $val['ride_id']; ?>" name="product_<?php echo $val['ride_id']; ?>" value='<?php echo $val['ride_id']; ?>'/>
                         </td> 
                         
-                        <td><input type="radio" name="fare_<?php echo $val['ride_id']; ?>" onclick="javascript: setRide(<?php echo $val['ride_id']; ?>, <?php echo $val['base_fare']; ?>);" value='<?php echo $val['base_fare']; ?>'/> Rs. <?php echo $val['base_fare']; ?>/-</td> 
+                        <td>Rs. <?php echo $val['base_fare']; ?>/-</td> 
                         <td><input type="radio" name="fare_<?php echo $val['ride_id']; ?>" onclick="javascript: setRide(<?php echo $val['ride_id']; ?>, <?php echo $val['advance']; ?>);" value='<?php echo $val['advance']; ?>'/> Rs. <?php echo $val['advance']; ?>/-</td> 
                         <td><div class="booknow">
                                     <input class="btn btn-danger button_select_car" type="submit" value="Book Now">                          
                                 </div></td>
                     </tr> 
-                    <?php } ?>
+                    <?php } 
+                    }?>
                     
                 </tbody> 
             </table>

@@ -64,6 +64,8 @@ define('CACHE_VERSION', '1.13');
 define('NOTIFY_EMAIL', 'pinaride@gmail.com');
 define('VENDOR_ID', 3);
 define('ADMIN_ID', 1);
+define('SHIRDI_DISTANCE', 296);
+define('LOG_SEARCH', 0);
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

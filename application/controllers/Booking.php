@@ -28,7 +28,7 @@ class Booking extends CI_Controller {
                 $ride = $ride['rows'];
                 $numberDays = 1;               
                 $payment = ($ride->amount * COMMISSION);
-                $ride_details = array ( 'car_model' => $ride->description, 'category' => $ride->category . $ride->seats .' Seater AC', 'base_fare' => $ride->amount, 'advance' => $payment, 'url' => $ride->url, 'distance' => 120, 'ride_id' => $ride->p_id, 'journey' => $ride->journey );
+                $ride_details = array ( 'car_model' => $ride->description, 'category' => $ride->category . ' ' . $ride->seats .' Seater AC', 'base_fare' => $ride->amount, 'advance' => $payment, 'url' => $ride->url, 'distance' => 120, 'ride_id' => $ride->p_id, 'journey' => $ride->journey );
                 $cust_query = array('journeyRoute' => 'local', 'journeySaddr' => 'Mumbai Darshan', 'journeyDaddr' => '', 'journeyDate' => $this->input->post('journeyDate'));
                 $product = $ride->p_id;
                 $this->session->set_userdata('cust_query', $cust_query);

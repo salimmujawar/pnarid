@@ -1,29 +1,31 @@
-<h1>Car Rental: Mumbai Darshan</h1>
+<h1>Car Rental: <?php echo $title; ?></h1>
 <hr/>
 <script type="text/javascript">
 	var current_date = '<?php echo $current_date;?>';
 	
 </script>
 <form action="/booking/start" method="post">
+    <table class="table table-hover">
+        <thead> <tr> <th>Car</th> <th>Model</th> <th>Fare</th> <th>Advance</th> </tr> </thead>
+        <tbody> 
     <?php foreach ($rides as $val) { ?>
-        <div class="radio">
-            <label>                
-                <div class="picture left">
-                    <img class="car_image img-polaroid"
+            <tr> 
+                <th scope="row"><img class="car_image img-polaroid"
                          src="<?php echo base_url('assets/images/cars/' . $val->url); ?>"
-                         width="100" alt=""> 
-
-                </div>
-                <input type="radio" name="ride_id" id="ride_id_<?php echo $val->p_id; ?>" value="<?php echo $val->p_id; ?>" checked>
-                <?php echo 'Rs. ' . $val->amount . '/- (' . $val->description . ')'; ?>
-            </label>
-        </div>
+                         width="100" alt=""> </th> 
+                <td> <?php echo $val->description; ?></td> 
+                <td> <?php echo 'Rs. ' . $val->amount . '/-'; ?></td>
+                <td><input type="radio" name="ride_id" id="ride_id_<?php echo $val->p_id; ?>" value="<?php echo $val->p_id; ?>" checked/>
+                <?php echo 'Rs. ' . ($val->amount * COMMISSION) . '/-'; ?></td>                 
+            </tr>         
     <?php } ?>
+    </tbody>    
+</table>
     <div class="row">
         <div class="col-xs-4">            
 
             <div class='input-group date' id='datepick'>
-                <label>Date:</label>
+                <label>Journey Date:</label>
                 <span class="input-group-addon"> <span
                         class="glyphicon glyphicon-calendar"></span>
                 </span> <input type='text' class="form-control"

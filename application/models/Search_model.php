@@ -27,25 +27,27 @@ class Search_model extends CI_Model {
         return array('distance' => $dist, 'time' => $time);
     }
     
-    public function getRideDetails($route, $distance, $ride_id =0) {
-        $rideData = array();
-            if ($route == 'round') {
-                $totalDistance = $distance * 2;
+    public function getRideDetails($route, $distance, $ride_id =0, $days = 1) {
+        $rideData = array();  
+        //echo $distance;
+            if ($route == 'round' && $days = 1) {
+                $distance = $distance * 2;
             }
-            if ($totalDistance > 80 && $totalDistance < 300 ) {
-                $totalDistance = 250;
-                $rideData = $this->getOutstationRides($totalDistance, $ride_id);
-            }elseif ($totalDistance > 300) {
-                $totalDistance = $totalDistance;   
-                $rideData = $this->getOutstationRides($totalDistance, $ride_id);
+            if ($distance > 80 && $distance < 250 ) {
+                $distance = 250;
+                $rideData = $this->getOutstationRides($distance, $ride_id);
+            }elseif ($distance > 250) {
+                //$distance = $distance;   
+                $rideData = $this->getOutstationRides($distance, $ride_id);
             } 
+            $rideData = $rideData + array('total_distance' => $distance);
             return $rideData;
     }
     
     private function getOutstationRides ($totalDistance, $ride_id = 0) {
         $rideData = array();
             $this->load->model('product_model');
-                if ($ride_id == 0) {
+                if (empty($ride_id)) {
                     $products = $this->product_model->getAllProducts("", array('journey' => 'out'));
                     //print_r($products);
                     foreach($products['rows'] as $key => $val) {
@@ -80,6 +82,18 @@ class Search_model extends CI_Model {
                 
                 return $rideData;
             
+    }
+    
+    function addSearchLog() {
+        if (LOG_SEARCH == 1) {
+          $campainge = (!empty($_GET['cmp']))?$_GET['cmp']:'organic';
+            $forw_for =  (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))?$_SERVER['HTTP_X_FORWARDED_FOR']:'';
+            $data = array('post' => json_encode($_POST), 'frw_client_ip' => $forw_for, 
+                'remote_ip' => $_SERVER['REMOTE_ADDR'], 'campainge' => $campainge);
+            $this->db->set($data);
+            $this->db->insert('search_log');  
+        }
+               
     }
 
     function getRides($params = array()) {
