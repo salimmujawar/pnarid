@@ -59,13 +59,14 @@ define('PG_PAYMENT_SUCCESSFUL', 'pg_payment_successful');
 define('ADMIN_CANCELLED_ORDER', 'admin_cancelled_order');
 define('DATE_FORMAT', 'd-M-Y');
 define('PER_PAGE', '5');
-define('DEFAULT_SEO_TITLE', ' Car on rental');
 define('CACHE_VERSION', '1.13');
 define('NOTIFY_EMAIL', 'pinaride@gmail.com');
 define('VENDOR_ID', 3);
 define('ADMIN_ID', 1);
 define('SHIRDI_DISTANCE', 296);
 define('LOG_SEARCH', 0);
+define('DEFAULT_SEO_TITLE', 'Pin A Ride: Find Best Car Rental Deals In Mumbai');
+define('DEFAULT_SEO_DESC', 'Find rates for renting a car in Mumbai, Pin A Ride is one the best taxi services provider, Easy Booking and cancellation, Pay min Advance fare and book a ride.');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

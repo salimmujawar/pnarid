@@ -118,8 +118,9 @@ class Home extends CI_Controller {
 			$data['seo_title']  = $cms->page_title;
 			$data['seo_desc']  = $cms->page_description;
 		}else{
-			$data['seo_title']  = 'Car Rental Services| Cab Services | Mumbai to Shirdi Taxi | Mumbai Pune Taxi Fare';
-			$data['seo_desc']  = 'Are You looking for Car and Cab Rental Services in Mumbai? Pin A Ride is one the best taxi services provider in Mumbai, Shirdi, Pune and more.';
+			$data['seo_title']  = 'Pin A Ride: Find Best Car Rental Deals In Mumbai';
+			//$data['seo_desc']  = 'Are You looking for Car and Cab Rental Services in Mumbai? Pin A Ride is one the best taxi services provider in Mumbai, Shirdi, Pune and more.';
+                        $data['seo_desc']  = 'Find rates for renting a car in Mumbai, Pin A Ride is one the best taxi services provider, Easy Booking and cancellation, Pay min Advance fare and book a ride.';
 		}
 		$data['h1_tag'] = $h1Tag;  
 		$data['ride_data'] = $rideData;

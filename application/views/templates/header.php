@@ -7,7 +7,7 @@
     <meta name="p:domain_verify" content="b0b76616fd7a7afb48ec971b5950c56c"/>
     <link rel="shortcut icon" href="<?php echo base_url('favicon.ico');?>" type="image/x-icon" />
     <title><?php echo (!empty($seo_title))?$seo_title:DEFAULT_SEO_TITLE;?></title>
-    <meta name="description" content="<?php echo (!empty($seo_desc))?$seo_desc:'';?>"/>
+    <meta name="description" content="<?php echo (!empty($seo_desc))?$seo_desc:DEFAULT_SEO_DESC;?>"/>
     <meta name="Keywords" content="Car Rental Services Mumbai, Cab Services in Mumbai, Mumbai to Pune Cab Services, Mumbai to Shirdi Taxi, Mumbai Pune Taxi Fare"/>
 
     <!-- Bootstrap core CSS -->

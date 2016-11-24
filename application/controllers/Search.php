@@ -59,8 +59,11 @@ class Search extends CI_Controller {
             $str = $_SERVER['REQUEST_URI'];
         }
         
-        $url = explode('/', $str);        
-        $data['title'] = ucwords(str_replace('-', ' ', $url[2])); // Capitalize the first letter
+        $url = explode('/', $str);      
+        $title = ucwords(str_replace('-', ' ', $url[2])); // Capitalize the first letter
+        $data['title'] = $title;
+        $data['seo_title'] = $title;
+        $data['seo_desc'] = $title . ', Mumbai Sightseeing booking on PinaRide – An On-Time, Comfortable and Reliable Service';
         $this->load->model('product_model');
         $rides = $this->product_model->getAllProducts("", array('journey' => $url[2]));
         $data['rides'] = $rides['rows'];

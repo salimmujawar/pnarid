@@ -58,11 +58,11 @@ if(is_object($user) && empty($user->first_name)) {
 							<?php echo ($checkedRoute == 'round')?'checked':'';?>
 							class="journeyType" value="round" checked/>Round
 						</label> 
-                                                <label class="radio-inline"> <input id="journeyRoute" type="radio"
+                                                <!--label class="radio-inline"> <input id="journeyRoute" type="radio"
 							name="journeyRoute"
 							<?php echo ($checkedRoute == 'one-way')?'checked':'';?>
 							class="journeyType" value="one-way"  />One Way
-						</label>                                                 
+						</label-->                                                 
 						<span id="journeyRouteSpan" class="help-block"></span>
 					</div>
 				</div>
@@ -238,30 +238,40 @@ if(is_object($user) && empty($user->first_name)) {
 				</a></li>
 			</ul>
 		</div>
-		<?php if (!empty($cms)) {?>	
+		<?php //if (!empty($cms)) {?>	
 		<!-- Content -->
 		<div class="clearfix"></div>
 		<div class="row">
-			<p><?php echo $cms->content;?></p>
+                    <h2>We Offer:</h2><hr/>
+			<p><?php //echo $cms->content;?>
+                         Are you looking for a safe and comfortable vehicle for your next family trip? Hopefully you are at the right place. Here at “Pin A Ride” we offer our riders a pleasant journey that they could never forget in their lifetime at the least price that no one can offer.
+                        </p>
+                        <p><br/>
+                        We have 24*7 cab facility to pick you up at where you are and to drop you at your destination without any hustle. The major hotspots in Maharashtra from where you can avail our offers are Mumbai, Pune, Shirdi, Lonavia, Darshan, Mahabaleshwar, Nashik, Khandala etc. So you choose the location, we make you feel comfortable with our luxury service.There are varieties of vehicle from which you can hire one until you complete your journey. And for your convenience we have made our car booking services easier than ever. Most importantly you can avail our services at best prices and that would definitely fits your budget, because we treat our customers as king.
+                        </p>
+                        <p><br/>
+                        We are most familiar for our Airport pickup and drop with wide variety of vehicles. We can make you catch your auspicious occasions within the city without any delay. This is why our cheapest car rental services are very famous among the Mumbai civilians. We have made many to feel happy with our services, give a chance to make you feel the same.
+                        </p>
 		</div>
 		<!-- Content -->
-		<?php } ?>
+		<?php //} ?>
 		<!-- We Offer -->
 		<div class="clearfix"></div>
 		<div class="row we_offer">
-		<h2>We Offer:</h2><hr/>
+                    <br/>
 		  <div class="text-center col-xs-6 col-sm-3">
-		  	<img class="img-thumbnail" alt="Car on rental" src="<?php echo base_url('assets/images/service_car.png')?>" data-holder-rendered="true" />
-		  	<h2>Car</h2>
+		  	<img class="img-thumbnail" alt="Indica on rental" src="<?php echo base_url('assets/images/cars/indica-215x127.jpg')?>" data-holder-rendered="true" />
+		  	<h2>Economy</h2>
 		  </div>
 		  <div class="text-center col-xs-6 col-sm-3">
-		  	<img class="img-thumbnail" alt="Van on rental" src="<?php echo base_url('assets/images/service_van.png')?>" data-holder-rendered="true" />
-		  	<h2>Van</h2>
+		  	<img class="img-thumbnail" alt="Etios on rental" src="<?php echo base_url('assets/images/cars/swift-215x127.png')?>" data-holder-rendered="true" />
+		  	<h2>Sedan</h2>
 		  </div>
 		  <div class="text-center col-xs-6 col-sm-3">
-		  	<img class="img-thumbnail" alt="Bus or Coach on rental" src="<?php echo base_url('assets/images/service_coaches.png')?>" data-holder-rendered="true" />
-		  	<h2>Coaches</h2>
+		  	<img class="img-thumbnail" alt="Innova on rental" src="<?php echo base_url('assets/images/cars/inova-215x127.png')?>" data-holder-rendered="true" />
+		  	<h2>Family</h2>
 		  </div>
+                    
 		</div>		
 		<!-- We Offer -->			
 	</div>
