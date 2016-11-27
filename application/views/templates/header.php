@@ -109,6 +109,7 @@
 				    		<li><a href="<?php echo base_url('admin/auth');?>">Users</a></li>
 				    		<li><a href="#">Coupons</a></li>
 				    		<li><a href="<?php echo base_url($rides);?>">Rides</a></li>
+                                                <li><a href="<?php echo base_url('admin/analytic/index');?>">Analytics</a></li>
 				    	<?php }else{ ?>				    	
 				    	<li><a href="#">Profile</a></li>
 				    	<?php } ?>
