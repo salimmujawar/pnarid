@@ -394,7 +394,7 @@ class Booking extends CI_Controller {
             'pickup_date' => date('d-n-Y', strtotime($bookData->pickup_datetime)), 'pickup_time' => date('h:i a', strtotime($bookData->pickup_datetime)),
             'numbers_days' => $bookData->days, 'numbers_ride' => $bookData->rides,
             'basic_fare' => $bookData->basic, 'advance_fare' => $bookData->basic,
-            'balance_fare' => $bookData->due, 'total_fare' => $bookData->total
+            'paid' => $bookData->paid, 'balance_fare' => $bookData->due, 'total_fare' => $bookData->total
         );
 
         //user notify email

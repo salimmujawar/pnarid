@@ -36,19 +36,21 @@
 		<thead>
 			<tr>
 				<th>Basic Amount</th>
-				<th>Service Tax</th>
-				<th>Total Amount</th>
+				<th>Service Tax</th>				
 				<th>Advance</th>
 				<th>Balance</th>
+                                <th>Total Amount</th>
+                                <th><b>Amount Paid</b></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td id="basicAmt"><?php echo $book_data->basic; ?></td>
-				<td id="serviceTax"><?php echo $book_data->tax; ?></td>
-				<td id="bookTotal"><?php echo $book_data->total; ?></td>
-				<td id="bookAdvance"><?php echo $book_data->paid; ?></td>
+				<td id="serviceTax"><?php echo $book_data->tax; ?></td>				
+				<td id="bookAdvance"><?php echo ($book_data->basic - $book_data->due); ?></td>
 				<td id="bookBal"><?php echo $book_data->due; ?></td>
+                                <td id="bookTotal"><?php echo $book_data->total; ?></td>
+                                <td id="bookTotal"><b><?php echo $book_data->paid; ?></b></td>
 			</tr>
 		</tbody>
 	</table>
