@@ -28,14 +28,17 @@
                       <th>keyword</th>
                       <th>match</th>
                       <th>device</th>
+                      <th>ip</th>
+                      <th>distance</th>
+                      <th>price</th>
                       <th>cdate</th>	              	             
 	            </tr>
 	          </thead>
 	          <tbody>
 	          	<?php foreach($analytic_list as $key => $analytic) { 
                             $post = json_decode($analytic->post, true);
-                            $query = parse_url($analytic->referer, PHP_URL_QUERY);
-                            parse_str($query, $query_arr);
+                            //$query = parse_url($analytic->referer, PHP_URL_QUERY);
+                            //parse_str($query, $query_arr);
                             //print_r($query_arr);        
                         ?>
 	            <tr>
@@ -45,10 +48,13 @@
                       <td><?php echo (isset($post['journeyDaddr']))?$post['journeyDaddr']:'';?></td>
                       <td><?php echo (isset($post['journeyDate']))?$post['journeyDate']:'';?></td>
                       <td><?php echo (isset($post['journeyReturndt']))?$post['journeyReturndt']:'';?></td>
-                      <td><?php echo (isset($query_arr['source']))?$query_arr['source']:$analytic->campainge;?></td>
-                      <td><?php echo (isset($query_arr['keyword']))?$query_arr['keyword']:'';?></td>
-                      <td><?php echo (isset($query_arr['matchtype']))?$query_arr['matchtype']:'';?></td>
-                      <td><?php echo (isset($query_arr['device']))?$query_arr['device']:'';?></td>
+                      <td><?php echo $analytic->source;?></td>
+                      <td><?php echo $analytic->keyword;?></td>
+                      <td><?php echo $analytic->matchtype;?></td>
+                      <td><?php echo $analytic->device;?></td>
+                      <td><?php echo $analytic->remote_ip;?></td>
+                      <td><?php echo $analytic->distance;?></td>
+                      <td><?php echo $analytic->price;?></td>
                       <td><?php echo date('d-M-Y h:i', strtotime($analytic->cdate));?></td>	              
 	            </tr>
 	            <?php }?>	            

@@ -84,12 +84,24 @@ class Search_model extends CI_Model {
             
     }
     
-    function addSearchLog() {
+    function addSearchLog($custom_data = array()) {
         if (LOG_SEARCH == 1) {            
+            $distance = (!empty($custom_data['distance']))?$custom_data['distance']:0;
+            $price    = (!empty($custom_data['price']))?$custom_data['price']:0;
+            $car_type    = (!empty($custom_data['car_type']))?$custom_data['car_type']:0;
+            $referer = $_SERVER['HTTP_REFERER'];
+            $query = parse_url($referer, PHP_URL_QUERY);
+            parse_str($query, $query_arr);
+            $keyword = (!empty($query_arr['keyword']))?$query_arr['keyword']:'';
+            $source = (!empty($query_arr['source']))?$query_arr['source']:'organic';
+            $matchtype = (!empty($query_arr['matchtype']))?$query_arr['matchtype']:'organic';
+            $device = (!empty($query_arr['device']))?$query_arr['device']:'';
             $campainge = (!empty($_GET['cmp']))?$_GET['cmp']:'organic';
             $forw_for =  (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))?$_SERVER['HTTP_X_FORWARDED_FOR']:'';
-            $data = array('post' => json_encode($_POST), 'referer'=> $_SERVER['HTTP_REFERER'] ,'frw_client_ip' => $forw_for, 
-                'remote_ip' => $_SERVER['REMOTE_ADDR'], 'campainge' => $campainge);
+            $data = array('post' => json_encode($_POST), 'referer'=>  $referer,'frw_client_ip' => $forw_for, 
+                'remote_ip' => $_SERVER['REMOTE_ADDR'], 'campainge' => $campainge,
+                'keyword' => $keyword, 'source' => $source, 'matchtype' => $matchtype, 'device' => $device,
+                'price' => $price, 'distance' => $distance, 'car_type' =>  $car_type );
             $this->db->set($data);
             $this->db->insert('search_log');  
         }

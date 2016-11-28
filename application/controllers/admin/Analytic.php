@@ -10,6 +10,29 @@ class Analytic extends CI_Controller {
         $this->load->library('session');
         $this->load->library(array('ion_auth', 'form_validation'));
     }
+    
+    /*function updatesearch() {
+        $this->load->model('analytic_model');
+        $analyticList = $this->analytic_model->getAllAnalytics();
+        //print_r($analyticList);
+        foreach($analyticList as $row) {
+            echo $row->referer;
+            $query = parse_url($row->referer, PHP_URL_QUERY);
+            parse_str($query, $query_arr);
+            //print_r($query_arr);
+            if (!empty($query_arr['source'])) {
+                $this->db->where('id', $row->id);
+                $order = array('source' => $query_arr['source'], 'keyword' => $query_arr['keyword'], 
+                                'matchtype' => $query_arr['matchtype'], 'device' => $query_arr['device']);
+                $this->db->update('search_log', $order); 
+            }else{
+                $this->db->where('id', $row->id);
+                $order = array('source' => 'organic');
+                $this->db->update('search_log', $order); 
+            }
+            
+        }
+    }*/
 
     function index() {
         $page = 'analytics';
@@ -30,7 +53,7 @@ class Analytic extends CI_Controller {
         $where = array();
         $like = array();
         if (!empty($_GET['campainge'])) {
-            $like['referer'] = $_GET['campainge'];
+            $where['source'] = $_GET['campainge'];
         }
         if (!empty($_GET['cdate'])) {
             $like['cdate'] = date('Y-m-d', strtotime($_GET['cdate']));

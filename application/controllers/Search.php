@@ -112,8 +112,7 @@ class Search extends CI_Controller {
         } else {
             $rideData = array();
             $jsonStr = "";
-            $this->load->model('search_model');            
-            $this->search_model->addSearchLog();
+            $this->load->model('search_model');   
             $from = strip_tags($_GET['from']);
             $to = strip_tags($_GET['to']);
             if (strtolower($from) == 'shirdi' || strtolower($to) == 'shirdi') {
@@ -132,6 +131,11 @@ class Search extends CI_Controller {
             $totalDistance = $distance['distance'];
             $numberDays = number_days($this->input->post('journeyDate'), $this->input->post('journeyReturndt'));
             $rideData = $this->search_model->getRideDetails($this->input->post('journeyRoute'), $totalDistance, 0, $numberDays);
+            $car_type = 'sedan';
+            $amount = (!empty($rideData['sedan']['base_fare']))?$rideData['sedan']['base_fare']:0;
+            $search_data = array('distance' => $totalDistance, 'price' => $amount, 'car_type' => $car_type);
+            //print_r($rideData);
+            $this->search_model->addSearchLog($search_data);
             $searchQuery['from'] = $from;
             $searchQuery['to'] = $to;
             $totalDistance = $rideData['total_distance'];
